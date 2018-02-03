@@ -1,1 +1,4 @@
-console.log("Main");
+const pageManager = require("./pages/PageManager");
+
+pageManager.createViews();
+pageManager.showTestView();
