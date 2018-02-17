@@ -20,12 +20,30 @@ DiagramView.prototype = Object.assign(Object.create(View.prototype), {
 
     this.graph.setHtmlLabels(true);
 
-    //this.graph.setEnabled(false);
+    var tableStyle = new Object();
+    tableStyle[mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_RECTANGLE;
+    tableStyle[mxConstants.STYLE_OPACITY] = 0;
+    tableStyle[mxConstants.STYLE_OVERFLOW] = 'fill';
+    tableStyle[mxConstants.STYLE_EDITABLE] = 0;
+    //tableStyle[mxConstants.STYLE_RESIZABLE] = 0;
+    this.graph.getStylesheet().putCellStyle('TABLE_STYLE',tableStyle);
 
+    var edgeStyle = this.graph.getStylesheet().getDefaultEdgeStyle();
+    edgeStyle[mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_CONNECTOR;
+    edgeStyle[mxConstants.STYLE_EDGE] = "elbowEdgeStyle";
+    edgeStyle[mxConstants.STYLE_STROKECOLOR] = "black";
+    this.graph.getStylesheet().putCellStyle('EDGE_STYLE',edgeStyle);
 
-    var v1 = this.graph.insertVertex(parent, null, this.generateTableHTML('Events'), 400, 400, 200, 200, 'fillColor=rgba(0, 0, 0, 0);strokeColor=rgba(0, 0, 0, 0)');
-    var v2 = this.graph.insertVertex(parent, null, this.generateTableHTML('Clients'), 100, 100, 200, 200);
-    var e1 = this.graph.insertEdge(parent, null, '', v1, v2);
+    var v1 = this.graph.insertVertex(parent, null, this.generateTableHTML('Events'), 400, 400, 200, 200, 'TABLE_STYLE');
+    var v2 = this.graph.insertVertex(parent, null, this.generateTableHTML('Clients'), 100, 100, 200, 200, 'TABLE_STYLE');
+    var e1 = this.graph.insertEdge(parent, null, '', v1, v2, 'EDGE_STYLE');
+
+    this.graph.addListener(mxEvent.DOUBLE_CLICK, function(sender, evt){
+      	var cell = evt.getProperty('cell');
+        if(cell!=null){
+          console.log("double clicked on cell.");
+        }
+    });
 
     this.graph.getModel().endUpdate();
   },
