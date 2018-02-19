@@ -12,13 +12,15 @@ DiagramView.prototype = Object.assign(Object.create(View.prototype), {
   setupMxGraph: function(){
     this.graph = new mxGraph(document.getElementById("DiagramContainer"));
 
-    new mxRubberband(this.graph);
+    this.rubberband = new mxRubberband(this.graph);
+    //this.rubberband.defaultOpacity = 1;
 
     var parent = this.graph.getDefaultParent();
 
     this.graph.getModel().beginUpdate();
 
     this.graph.setHtmlLabels(true);
+    this.graph.setAllowDanglingEdges(false);
 
     var tableStyle = new Object();
     tableStyle[mxConstants.STYLE_SHAPE] = mxConstants.SHAPE_RECTANGLE;
@@ -36,7 +38,7 @@ DiagramView.prototype = Object.assign(Object.create(View.prototype), {
 
     var v1 = this.graph.insertVertex(parent, null, this.generateTableHTML('Events'), 400, 400, 200, 200, 'TABLE_STYLE');
     var v2 = this.graph.insertVertex(parent, null, this.generateTableHTML('Clients'), 100, 100, 200, 200, 'TABLE_STYLE');
-    var e1 = this.graph.insertEdge(parent, null, '', v1, v2, 'EDGE_STYLE');
+    //var e1 = this.graph.insertEdge(parent, null, '', v1, v2, 'EDGE_STYLE');
 
     this.graph.addListener(mxEvent.DOUBLE_CLICK, function(sender, evt){
       	var cell = evt.getProperty('cell');

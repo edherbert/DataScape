@@ -1,3 +1,4 @@
 const pageManager = require("./pages/PageManager");
 
-pageManager.showDiagramView();
+//pageManager.showDiagramView();
+pageManager.showDatabaseSelectionView();

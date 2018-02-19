@@ -1,9 +1,11 @@
 const TestView = require('./TestView');
 const DiagramView = require('./DiagramView');
+const DataBaseSelectionView = require('./DatabaseSelectionView')
 
 function PageManager(){
   this.testView = new TestView();
   this.diagramView = new DiagramView();
+  this.dataBaseSelectionView = new DataBaseSelectionView();
 }
 
 PageManager.prototype = {
@@ -15,6 +17,10 @@ PageManager.prototype = {
 
   showDiagramView: function(){
     this.diagramView.show();
+  },
+
+  showDatabaseSelectionView: function(){
+    this.dataBaseSelectionView.show();
   }
 };
 
