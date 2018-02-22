@@ -5,9 +5,9 @@ function FieldType(){
 FieldType.prototype = {
 	Requirements: [],
 
-	Generate: function(previous){
+	generate: function(previous){
 		return previous;
 }
 };
 
-module.exports = new FieldType;
+module.exports = FieldType;

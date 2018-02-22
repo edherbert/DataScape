@@ -1,11 +1,16 @@
-function TypeManager(){
+const TestType = require('./TestType');
 
+function TypeManager(){
+  this.testType = new TestType();
 }
 
 TypeManager.prototype = {
-  types: ["first name", "surname"],
-	Generate: function(previous){
-		return previous;
+  getFieldType: function(fieldTypeName){
+      switch(fieldTypeName){
+        case "TestType":
+          return this.testType;
+          break;
+      }
   }
 };
 

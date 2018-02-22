@@ -1,4 +1,7 @@
 const pageManager = require("./pages/PageManager");
+const dataGenerator = require("./DataGenerator/DataGenerator")
 
-//pageManager.showDiagramView();
-pageManager.showDatabaseSelectionView();
+pageManager.showDiagramView();
+//pageManager.showDatabaseSelectionView();
+
+dataGenerator.generateData();
