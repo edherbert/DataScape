@@ -3,19 +3,21 @@ const TableParser = require('./TableParser');
 function DataGenerator(){
   this.tableParser = new TableParser();
 
+  //This will be removed in the final version.
+  //It's just to show what the input could look like.
   this.testJson = {
     tables: [
       {
         name: "requirements",
         types: [
-          {fieldName: "First Name", fieldType: "FirstName"},
+          {fieldName: "FirstName", fieldType: "FirstName"},
           {fieldName: "Gender", fieldType: "Gender"}
         ]
       },
       {
         name: "AnotherTest",
         types: [
-          {fieldName: "address", fieldType: "Address"},
+          {fieldName: "FirstName", fieldType: "FirstName"},
           {fieldName: "Postcode", fieldType: "Postcode"}
         ]
       },

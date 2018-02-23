@@ -61,7 +61,7 @@ DiagramView.prototype = Object.assign(Object.create(View.prototype), {
     string += '</table>';
 
     //string = '<table><tr><th>Company</th></tr><tr><th>Hello</th></tr></table>';
-    console.log(string);
+    //console.log(string);
     return string;
   }
 });

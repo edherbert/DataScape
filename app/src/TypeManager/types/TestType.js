@@ -1,4 +1,4 @@
-const FieldType = require("./FieldType");
+const FieldType = require("../FieldType");
 
 function TestType(){
 
