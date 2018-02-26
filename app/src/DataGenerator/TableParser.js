@@ -16,15 +16,19 @@ TableParser.prototype = {
 
       //console.log(requirements);
       for(i = 0; i < requirements.length; i++){
-        if(!this.checkIfListed(requirements[i])){
-          this.traverseRequirements(requirements[i]);
-          this.done.push(requirements[i]);
+        if(requirements[i] == "ForeignKey"){
+          //The entry is a foreign key, so don't try to trace it's requirements.
+        }else{
+          if(!this.checkIfListed(requirements[i])){
+            this.traverseRequirements(requirements[i]);
+            this.done.push(requirements[i]);
+          }
         }
       }
 
       structure.tables[t].typeOrder = this.done;
 
-      //console.log(this.done);
+      console.log(this.done);
       //Reset the done list after use.
       this.done = [];
 
