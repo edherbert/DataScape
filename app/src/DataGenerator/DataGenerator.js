@@ -17,7 +17,8 @@ function DataGenerator(){
       {
         name: "AnotherTest",
         types: [
-          {fieldName: "FirstName", fieldType: "FirstName"},
+          {fieldName: "FirstName", fieldType: "Gender"},
+          {fieldName: "Postcode", fieldType: "Postcode"},
           {fieldName: "Postcode", fieldType: "Postcode"}
         ]
       },
@@ -32,7 +33,7 @@ DataGenerator.prototype = {
   constructor: DataGenerator,
 
   generateData: function(){
-    this.tableParser.parseStructure(this.testJson);
+    let passedTables = this.tableParser.parseStructure(this.testJson);
   }
 };
 
