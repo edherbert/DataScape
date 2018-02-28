@@ -8,7 +8,18 @@ GenderType.prototype = Object.assign(Object.create(FieldType.prototype), {
   constructor: GenderType,
 
   generate: function(previous){
-    console.log("Generating for the Gender");
+    let current = previous;
+    if(typeof previous == 'undefined') current = {};
+
+    let target = "";
+    if(Math.random() * 2 <= 1){
+      target = "Male";
+    }else{
+      target = "Female";
+    }
+    current.Gender = target;
+
+    return current;
   }
 });
 

@@ -8,7 +8,11 @@ PostcodeType.prototype = Object.assign(Object.create(FieldType.prototype), {
   constructor: PostcodeType,
 
   generate: function(previous){
-    console.log("Generating a postcode");
+    let current = previous;
+    if(typeof previous == 'undefined') current = {};
+    current.Postcode = "PO4 9LD";
+
+    return current;
   }
 });
 

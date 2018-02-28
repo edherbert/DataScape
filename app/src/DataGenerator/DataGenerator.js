@@ -15,6 +15,7 @@ function DataGenerator(){
         types: [
           {fieldName: "FirstName", fieldType: "FirstName"},
           {fieldName: "Gender", fieldType: "Gender"},
+          {fieldName: "SecondName", fieldType: "SecondName"},
           {fieldName: "testKey", fieldType: "ForeignKey", tableId: 1}
         ]
       },

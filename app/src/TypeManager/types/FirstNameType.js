@@ -1,7 +1,8 @@
 const FieldType = require("../FieldType");
 
 function FirstNameType(){
-
+  this.maleNames = ['Liam', 'Jacob', 'William', 'Ethan', 'Nathan', 'James', 'Alex', 'Bilbo'];
+  this.femaleNames = ['Emma', 'Olivia', 'Sophie', 'Isabella', 'Abigail', 'Emily', 'Elizabeth', 'Ella', 'Shasdane'];
 }
 
 FirstNameType.prototype = Object.assign(Object.create(FieldType.prototype), {
@@ -10,7 +11,18 @@ FirstNameType.prototype = Object.assign(Object.create(FieldType.prototype), {
   Requirements: ["Gender"],
 
   generate: function(previous){
-    console.log("Generating for the First Name");
+    let current = previous;
+    if(typeof previous == 'undefined') current = {};
+
+    let target = "";
+    if(previous.Gender == "Male"){
+      target = this.maleNames[Math.floor(Math.random() * this.maleNames.length)];
+    }else{
+      target = this.femaleNames[Math.floor(Math.random() * this.femaleNames.length)];
+    }
+    current.firstName = target;
+
+    return current;
   }
 });
 

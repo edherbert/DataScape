@@ -8,7 +8,11 @@ TestType.prototype = Object.assign(Object.create(FieldType.prototype), {
   constructor: TestType,
 
   generate: function(previous){
-    console.log("Generating for the test type");
+    let current = previous;
+    if(typeof previous == 'undefined') current = {};
+    current.Test = "This is a test";
+
+    return current;
   }
 });
 
