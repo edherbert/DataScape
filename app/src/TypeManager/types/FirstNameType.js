@@ -20,7 +20,7 @@ FirstNameType.prototype = Object.assign(Object.create(FieldType.prototype), {
     }else{
       target = this.femaleNames[Math.floor(Math.random() * this.femaleNames.length)];
     }
-    current.firstName = target;
+    current.FirstName = target;
 
     return current;
   }

@@ -14,7 +14,7 @@ TableParser.prototype = {
         requirements.push(""+structure.tables[t].types[i].fieldType);
       }
 
-      console.log(requirements);
+      //console.log(requirements);
       for(i = 0; i < requirements.length; i++){
         if(requirements[i] == "ForeignKey"){
           //The entry is a foreign key, so don't try to trace it's requirements.
@@ -28,7 +28,7 @@ TableParser.prototype = {
 
       structure.tables[t].typeOrder = this.done;
 
-      console.log(this.done);
+      //console.log(this.done);
       //Reset the done list after use.
       this.done = [];
 

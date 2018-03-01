@@ -18,7 +18,7 @@ FieldGenerator.prototype = {
         let type = typeManager.getFieldType(parsedTables.tables[t].typeOrder[f]);
         for(y = 0; y < parsedTables.tables[t].requiredAmmount; y++){
           parsedTables.tables[t].data[y] = type.generate(parsedTables.tables[t].data[y]);
-          console.log(parsedTables.tables[t].data[y]);
+          //console.log(parsedTables.tables[t].data[y]);
         }
       }
     }
