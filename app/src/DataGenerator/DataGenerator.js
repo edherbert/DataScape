@@ -47,7 +47,12 @@ DataGenerator.prototype = {
     let generatedData = this.fieldGenerator.generateData(parsedTables);
 
     let linkedTables = this.tableLinker.linkTables(generatedData);
-    console.log(linkedTables);
+
+    for(t = 0; t < linkedTables.tables.length; t++){
+      for(i = 0; i < linkedTables.tables[t].done.length; i++){
+        console.log(linkedTables.tables[t].done[i]);        
+      }
+    }
   }
 };
 

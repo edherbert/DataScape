@@ -5,6 +5,7 @@ function View(){
 View.prototype = {
   constructor: View,
 
+  //These two functions are also run by popups
   hide: function(){
     this.container.style.visibility = "hidden";
   },

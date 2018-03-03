@@ -1,7 +1,8 @@
 const View = require('./View');
 
-function DiagramView(){
+function DiagramView(pageManager){
   this.container = document.getElementById("DiagramView");
+  this.pageManager = pageManager;
 
   this.setupMxGraph();
 }
@@ -10,10 +11,16 @@ constructor: DiagramView,
 DiagramView.prototype = Object.assign(Object.create(View.prototype), {
 
   setupMxGraph: function(){
+		mxConnectionHandler.prototype.connectImage = new mxImage('connector.gif', 16, 16);
+
     this.graph = new mxGraph(document.getElementById("DiagramContainer"));
+
+    this.graph.setConnectable(true);
 
     this.rubberband = new mxRubberband(this.graph);
     //this.rubberband.defaultOpacity = 1;
+
+    //this.graph.guidesEnabled = true;
 
     var parent = this.graph.getDefaultParent();
 
@@ -40,10 +47,14 @@ DiagramView.prototype = Object.assign(Object.create(View.prototype), {
     var v2 = this.graph.insertVertex(parent, null, this.generateTableHTML('Clients'), 100, 100, 200, 200, 'TABLE_STYLE');
     //var e1 = this.graph.insertEdge(parent, null, '', v1, v2, 'EDGE_STYLE');
 
+    var that = this;
     this.graph.addListener(mxEvent.DOUBLE_CLICK, function(sender, evt){
       	var cell = evt.getProperty('cell');
         if(cell!=null){
-          console.log("double clicked on cell.");
+          //console.log(cell.id);
+          //console.log(cell.getValue());
+
+          that.pageManager.popupTableEditorView();
         }
     });
 

@@ -23,6 +23,13 @@ table {
     border-collapse: collapse;
     width: 100%;
     height:100%;
+
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
 }
 
 td, th {
@@ -33,4 +40,44 @@ td, th {
 
 tr:nth-child(even) {
     background-color: #dddddd;
+}
+
+#TableEditorView{
+  background-color: rgba(0, 0, 0, 0.5);
+
+  font-family: Arial;
+}
+
+#TableEditorView > #backgroundView{
+  background-color: #E8E8E8;
+  border: 1px solid black;
+
+  padding: 1em;
+
+  width: 50%;
+  margin: auto;
+  margin-top: 1em;
+}
+
+#tableTitleField{
+  background-color: rgba(0, 0, 0, 0);
+  outline: none;
+  border: 0;
+  color: black;
+
+  font-size: 20pt;
+}
+
+#backgroundView > button{
+  margin-top: 1em;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+}
+
+@keyframes fadeOut {
+    from {opacity: 1;}
+    to {opacity:0 ;}
 }
