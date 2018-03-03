@@ -11,12 +11,7 @@ SecondNameType.prototype = Object.assign(Object.create(FieldType.prototype), {
     let current = previous;
     if(typeof previous == 'undefined') current = {};
 
-    let secondName = "";
-    if(current.FirstName == "Bilbo"){
-       secondName = "Swagins";
-    }else{
-      secondName = this.secondNames[Math.floor(Math.random() * this.secondNames.length)];
-    }
+    let secondName = this.secondNames[Math.floor(Math.random() * this.secondNames.length)];
     current.SecondName = secondName;
 
     return current;

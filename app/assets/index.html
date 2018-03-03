@@ -10,6 +10,10 @@
 </head>
 <body>
 
+<div id = "topBar">
+<div id = "topBarTitle"><b>Data</b>scape</div>
+</div>
+
 <div id = "testView" class = "view">
 <h1>test view</h1>
 <p>Hey look it's a button!</p>
@@ -20,10 +24,17 @@
 
 <div id = "dataBaseSelectionView" class = "view">
 <button id = "newDbbutton" >Create a database</button>
-<div class = "DBEntry">A database</div>
 </div>
 
 <div id = "DiagramView" class = "view">
+<div id = "DiagramToolbar">
+  <ol>
+    <li><div class = "DiagramToolBarItem" id = "generateDataButton">Generate Data</div></li>
+    <li><div class = "DiagramToolBarItem" id = "createTableButton">Create table</div></li>
+
+    <li><div class = "DiagramToolBarItem" id = "returnToSelectionButton">Return to database Selection</div></li>
+  </ol>
+</div>
 <div id = "DiagramContainer"></div>
 </div>
 

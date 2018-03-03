@@ -1,8 +1,13 @@
 const View = require('./View');
+const dataGenerator = require('../DataGenerator/DataGenerator')
 
 function DiagramView(pageManager){
   this.container = document.getElementById("DiagramView");
   this.pageManager = pageManager;
+
+  document.getElementById("createTableButton").onclick = this.createTableButton.bind(this);
+  document.getElementById("returnToSelectionButton").onclick = this.returnToSelection.bind(this);
+  document.getElementById("generateDataButton").onclick = this.generateDataButtonPressed.bind(this);
 
   this.setupMxGraph();
 }
@@ -61,6 +66,20 @@ DiagramView.prototype = Object.assign(Object.create(View.prototype), {
     this.graph.getModel().endUpdate();
   },
 
+  createTableButton: function(){
+    this.graph.getModel().beginUpdate();
+    var v1 = this.graph.insertVertex(this.graph.getDefaultParent(), null, this.generateTableHTML('Events'), 10, 10, 200, 200, 'TABLE_STYLE');
+    this.graph.getModel().endUpdate();
+  },
+
+  returnToSelection: function(){
+    this.pageManager.showDatabaseSelectionView();
+  },
+
+  generateDataButtonPressed: function(){
+      dataGenerator.generateData();
+  },
+
   generateTableHTML: function(tableTitle){
     var string = '';
     string += '<table>';
@@ -74,6 +93,18 @@ DiagramView.prototype = Object.assign(Object.create(View.prototype), {
     //string = '<table><tr><th>Company</th></tr><tr><th>Hello</th></tr></table>';
     //console.log(string);
     return string;
+  },
+
+  show: function(){
+    this.container.style.visibility = "visible";
+    this.graph.setEnabled(true);
+    this.graph.getModel().setVisible(this.graph.getDefaultParent(), true);
+  },
+
+  hide: function(){
+    this.container.style.visibility = "hidden";
+    this.graph.setEnabled(false);
+    this.graph.getModel().setVisible(this.graph.getDefaultParent(), false);
   }
 });
 

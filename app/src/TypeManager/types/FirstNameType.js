@@ -1,7 +1,7 @@
 const FieldType = require("../FieldType");
 
 function FirstNameType(){
-  this.maleNames = ['Liam', 'Jacob', 'William', 'Ethan', 'Nathan', 'James', 'Alex', 'Bilbo'];
+  this.maleNames = ['Liam', 'Jacob', 'William', 'Ethan', 'Nathan', 'James', 'Alex'];
   this.femaleNames = ['Emma', 'Olivia', 'Sophie', 'Isabella', 'Abigail', 'Emily', 'Elizabeth', 'Ella', 'Shasdane'];
 }
 

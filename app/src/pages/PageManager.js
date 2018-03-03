@@ -6,7 +6,7 @@ const TableEditorView = require('./TableEditorView')
 function PageManager(){
   this.testView = new TestView();
   this.diagramView = new DiagramView(this);
-  this.dataBaseSelectionView = new DataBaseSelectionView();
+  this.dataBaseSelectionView = new DataBaseSelectionView(this);
   this.tableEditorView = new TableEditorView();
 }
 
@@ -18,10 +18,12 @@ PageManager.prototype = {
   },
 
   showDiagramView: function(){
+    this.dataBaseSelectionView.hide();
     this.diagramView.show();
   },
 
   showDatabaseSelectionView: function(){
+    this.diagramView.hide();
     this.dataBaseSelectionView.show();
   },
 
