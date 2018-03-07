@@ -36,6 +36,7 @@ DatabaseSelectionView.prototype = Object.assign(Object.create(View.prototype), {
   },
 
   databaseSelected: function(){
+    this.pageManager.loadDatabase();
     this.pageManager.showDiagramView();
   }
 });

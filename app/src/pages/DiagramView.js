@@ -1,5 +1,6 @@
 const View = require('./View');
 const dataGenerator = require('../DataGenerator/DataGenerator')
+const structureManager = require('../StructureManager')
 
 function DiagramView(pageManager){
   this.container = document.getElementById("DiagramView");
@@ -48,18 +49,26 @@ DiagramView.prototype = Object.assign(Object.create(View.prototype), {
     edgeStyle[mxConstants.STYLE_STROKECOLOR] = "black";
     this.graph.getStylesheet().putCellStyle('EDGE_STYLE',edgeStyle);
 
-    var v1 = this.graph.insertVertex(parent, null, this.generateTableHTML('Events'), 400, 400, 200, 200, 'TABLE_STYLE');
-    var v2 = this.graph.insertVertex(parent, null, this.generateTableHTML('Clients'), 100, 100, 200, 200, 'TABLE_STYLE');
+    //var v1 = this.graph.insertVertex(parent, null, this.generateTableHTML('Events'), 400, 400, 200, 200, 'TABLE_STYLE');
+    //var v2 = this.graph.insertVertex(parent, null, this.generateTableHTML('Clients'), 100, 100, 200, 200, 'TABLE_STYLE');
     //var e1 = this.graph.insertEdge(parent, null, '', v1, v2, 'EDGE_STYLE');
 
     var that = this;
+    var keyHandler = new mxKeyHandler(this.graph);
+    keyHandler.bindKey(46, function(evt)
+    {
+      if (that.graph.isEnabled())
+      {
+        that.graph.removeCells();
+      }
+    });
     this.graph.addListener(mxEvent.DOUBLE_CLICK, function(sender, evt){
       	var cell = evt.getProperty('cell');
         if(cell!=null){
           //console.log(cell.id);
           //console.log(cell.getValue());
 
-          that.pageManager.popupTableEditorView();
+          that.pageManager.popupTableEditorView(cell.getId());
         }
     });
 
@@ -67,9 +76,18 @@ DiagramView.prototype = Object.assign(Object.create(View.prototype), {
   },
 
   createTableButton: function(){
+    let tableData = {title: "New table", requiredAmmount: 10, x: 100, y: 100, width: 200, height: 200, types: []};
+    tableData.tableId = this.createTable(tableData);
+
+    structureManager.pushTable(tableData);
+  },
+
+  createTable: function(e){
     this.graph.getModel().beginUpdate();
-    var v1 = this.graph.insertVertex(this.graph.getDefaultParent(), null, this.generateTableHTML('Events'), 10, 10, 200, 200, 'TABLE_STYLE');
+    var table = this.graph.insertVertex(this.graph.getDefaultParent(), null, this.generateTableHTML(e), e.x, e.y, e.width, e.height, 'TABLE_STYLE');
     this.graph.getModel().endUpdate();
+
+    return table.getId();
   },
 
   returnToSelection: function(){
@@ -80,14 +98,15 @@ DiagramView.prototype = Object.assign(Object.create(View.prototype), {
       dataGenerator.generateData();
   },
 
-  generateTableHTML: function(tableTitle){
+  generateTableHTML: function(table){
     var string = '';
     string += '<table>';
-    string += '<tr><th>'+tableTitle+'</th></tr>';
-    string += '<tr><td>Pk</td></tr>';
-    string += '<tr><td>Name</td></tr>';
-    string += '<tr><td>Date</td></tr>';
-    string += '<tr><td>Email</td></tr>';
+    string += '<tr><th>'+table.title+'</th></tr>';
+
+    for(count = 0; count < table.types.length; count++){
+      string += '<tr><td>'+table.types[count].fieldName+'</td></tr>';
+    }
+
     string += '</table>';
 
     //string = '<table><tr><th>Company</th></tr><tr><th>Hello</th></tr></table>';
@@ -95,15 +114,19 @@ DiagramView.prototype = Object.assign(Object.create(View.prototype), {
     return string;
   },
 
+  setGraphEnabled: function(enabled){
+    this.graph.setEnabled(enabled);
+  },
+
   show: function(){
     this.container.style.visibility = "visible";
-    this.graph.setEnabled(true);
+    this.setGraphEnabled(true);
     this.graph.getModel().setVisible(this.graph.getDefaultParent(), true);
   },
 
   hide: function(){
     this.container.style.visibility = "hidden";
-    this.graph.setEnabled(false);
+    this.setGraphEnabled(false);
     this.graph.getModel().setVisible(this.graph.getDefaultParent(), false);
   }
 });
