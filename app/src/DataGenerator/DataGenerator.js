@@ -28,7 +28,8 @@ function DataGenerator(){
         types: [
           {fieldName: "FirstName", fieldType: "Gender"},
           {fieldName: "Postcode", fieldType: "Postcode"},
-          {fieldName: "Postcode", fieldType: "Postcode"}
+          {fieldName: "Postcode", fieldType: "Postcode"},
+		  {fieldName: "Colour", fieldType: "Colour"}
         ]
       },
     ],
