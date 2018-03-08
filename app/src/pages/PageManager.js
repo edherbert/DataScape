@@ -36,6 +36,7 @@ PageManager.prototype = {
 
   popoutTableSelection: function(){
     this.diagramView.setGraphEnabled(true);
+    this.diagramView.updateTable(this.tableEditorView.currentId);
     this.tableEditorView.popout();
   },
 

@@ -3,7 +3,7 @@ const FirstNameType = require('./types/FirstNameType');
 const SecondNameType = require('./types/SecondNameType');
 const GenderType = require('./types/GenderType');
 const PostcodeType = require('./types/PostcodeType');
-const RandomColourType = require('./types/RandomColourType'); //Reference/including from another class 
+const RandomColourType = require('./types/RandomColourType'); //Reference/including from another class
 const BooleanType = require('./types/BooleanType');
 
 function TypeManager(){
@@ -34,12 +34,12 @@ TypeManager.prototype = {
         case "Postcode":
           return this.postcodeType;
           break;
-		case "Colour":
-		  return this.randomColourType;
-		  break; //Break is used to stop it from searching when its found the data
-		case "Boolean":
-			return this.booleanType;
-			break;
+		    case "Colour":
+		      return this.randomColourType;
+		      break; //Break is used to stop it from searching when its found the data
+		    case "Boolean":
+			    return this.booleanType;
+			    break;
         default:
           console.log("No type was found for " + fieldTypeName);
           break;

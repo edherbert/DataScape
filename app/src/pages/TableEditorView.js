@@ -8,6 +8,10 @@ function TableEditorView(pageManager){
   this.tableContainer = document.getElementById("TableEditorTableContainer");
   this.tableTitleInput = document.getElementById("tableTitleField");
 
+  this.currentId = 0;
+
+  this.nameBoxes = [];
+  this.typeBoxes = [];
 
   //Create the base of the table, the headers are added during the clear
   this.table = document.createElement('table');
@@ -25,6 +29,7 @@ TableEditorView.prototype = Object.assign(Object.create(View.prototype), {
 
   //Make the view appear as a popup, rather than as something that fills the entire screen.
   popup: function(id){
+    this.currentId = id;
     let table = structureManager.getTableById(id);
     if(!table) return;
 
@@ -63,19 +68,37 @@ TableEditorView.prototype = Object.assign(Object.create(View.prototype), {
     var first = document.createElement('td');
     var second = document.createElement('td');
 
-    var input = document.createElement('input');
-    input.value = name;
-    first.append(input);
+    var nameInput = document.createElement('input');
+    nameInput.value = name;
+    first.append(nameInput);
 
     second.innerHTML = fieldType;
+
+    this.nameBoxes.push(nameInput);
+    this.typeBoxes.push(second.innerHTML);
 
     row.append(first);
     row.append(second);
     this.table.append(row);
   },
 
+  updateStructureManager: function(){
+    let tempTable = [];
+
+    for(t = 0; t < this.nameBoxes.length; t++){
+      tempTable.push({fieldName: this.nameBoxes[t].value, fieldType: this.typeBoxes[t]});
+    }
+
+    structureManager.setTableTitle(this.currentId, this.tableTitleInput.value);
+    structureManager.setTableTypes(this.currentId, tempTable);
+  },
+
   popout: function(){
+    this.currentId = 0;
     this.container.style.animation = "fadeOut "+this.speed+"s";
+
+    this.nameBoxes = [];
+    this.typeBoxes = [];
 
     //Hide after the ammount of time the animation takes. This is just so the user can actually see the animation.
     var that = this;
@@ -87,6 +110,7 @@ TableEditorView.prototype = Object.assign(Object.create(View.prototype), {
   backgroundPressed: function(e){
     //Make the event not fire on a child of the background.
     if(e.target != this.container) return;
+    this.updateStructureManager();
     this.pageManager.popoutTableSelection();
   },
 

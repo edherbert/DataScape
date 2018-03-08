@@ -5,9 +5,9 @@ function BooleanType(){
 
 BooleanType.prototype = Object.assign(Object.create(FieldType.prototype), {
   constructor: BooleanType,
-  
+
   generate: function(previous){
-	
+
 	let current = previous;
     if(typeof previous == 'undefined') current = {};
 

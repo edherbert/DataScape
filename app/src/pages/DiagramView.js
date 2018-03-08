@@ -118,6 +118,13 @@ DiagramView.prototype = Object.assign(Object.create(View.prototype), {
     this.graph.setEnabled(enabled);
   },
 
+  updateTable: function(id){
+    let cell = this.graph.getModel().getCell(id);
+
+    this.graph.getModel().setValue(cell, this.generateTableHTML(structureManager.getTableById(id)));
+    this.graph.refresh();
+  },
+
   show: function(){
     this.container.style.visibility = "visible";
     this.setGraphEnabled(true);

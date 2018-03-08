@@ -12,7 +12,7 @@ function DataGenerator(){
   this.testJson = {
     tables: [
       {
-        name: "requirements",
+        title: "requirements",
         requiredAmmount: 10,
         types: [
           {fieldName: "SecondName", fieldType: "SecondName"},
@@ -23,7 +23,7 @@ function DataGenerator(){
         ]
       },
       {
-        name: "AnotherTest",
+        title: "AnotherTest",
         requiredAmmount: 10,
         types: [
           {fieldName: "FirstName", fieldType: "Gender"},
@@ -52,7 +52,7 @@ DataGenerator.prototype = {
 
     for(t = 0; t < linkedTables.tables.length; t++){
       for(i = 0; i < linkedTables.tables[t].done.length; i++){
-        console.log(linkedTables.tables[t].done[i]);        
+        console.log(linkedTables.tables[t].done[i]);
       }
     }
   }

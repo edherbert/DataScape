@@ -13,12 +13,28 @@ StructureManager.prototype = {
     this.structure = s;
   },
 
-  getTableById: function(id){
+  getTableIndexById: function(id){
     for(t = 0; t < this.structure.tables.length; t++){
       if(this.structure.tables[t].tableId == id){
-        return this.structure.tables[t];
+        return t;
       }
     }
+  },
+
+  getTableById: function(id){
+    return this.structure.tables[this.getTableIndexById(id)];
+  },
+
+  replaceTable: function(id, table){
+    this.structure.tables[this.getTableIndexById(id)] = table;
+  },
+
+  setTableTitle: function(id, title){
+    this.structure.tables[this.getTableIndexById(id)].title = title;
+  },
+
+  setTableTypes: function(id, types){
+    this.structure.tables[this.getTableIndexById(id)].types = types;
   },
 
   pushTable: function(table){
