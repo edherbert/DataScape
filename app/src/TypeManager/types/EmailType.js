@@ -18,7 +18,7 @@ EmailType.prototype = Object.assign(Object.create(FieldType.prototype), {
 		let targetEnding = "";
     targetService = this.emailService[Math.floor(Math.random() * this.emailService.length)];
     targetEnding = this.emailEnding[Math.floor(Math.random() * this.emailEnding.length)];
-    current.Email = previous.FirstName + previous.SecondName + this.emailService + this.emailEnding;
+    current.Email = previous.FirstName + previous.SecondName + this.targetService + this.targetEnding;
 
     return current;
   }
