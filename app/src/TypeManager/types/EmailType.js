@@ -14,11 +14,9 @@ EmailType.prototype = Object.assign(Object.create(FieldType.prototype), {
     let current = previous;
     if(typeof previous == 'undefined') current = {};
 
-    let targetService = "";
-		let targetEnding = "";
-    targetService = this.emailService[Math.floor(Math.random() * this.emailService.length)];
-    targetEnding = this.emailEnding[Math.floor(Math.random() * this.emailEnding.length)];
-    current.Email = previous.FirstName + previous.SecondName + this.emailService + this.emailEnding;
+    let targetService = this.emailService[Math.floor(Math.random() * this.emailService.length)];
+    let targetEnding = this.emailEnding[Math.floor(Math.random() * this.emailEnding.length)];
+    current.Email = previous.FirstName + previous.SecondName + this.targetService + this.targetEnding;
 
     return current;
   }
