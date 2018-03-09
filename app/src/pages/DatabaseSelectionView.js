@@ -1,4 +1,5 @@
 const View = require('./View');
+const DatabaseEditPopup = require('./DatabaseEditPopup');
 
 function DatabaseSelectionView(pageManager){
   this.pageManager = pageManager;
@@ -27,10 +28,24 @@ DatabaseSelectionView.prototype = Object.assign(Object.create(View.prototype), {
     newDb.className = "DBEntry";
     newDb.innerHTML = "new Database";
 
+    let editDb = document.createElement('img');
+    editDb.className = "DbEditButton";
+    editDb.src = "test.png";
+
+    editDb.onclick = function(e){
+      let dbContainer = e.target.parentElement.childNodes[0];
+
+      let databaseEdit = new DatabaseEditPopup(dbContainer.innerHTML, dbContainer);
+      databaseEdit.popup();
+    }
+
     newDb.onclick = this.databaseSelected.bind(this);
 
     let listItem = document.createElement('li');
+    listItem.className = "DbSelectionList"
     listItem.append(newDb);
+
+    listItem.append(editDb);
 
     this.list.appendChild(listItem);
   },
