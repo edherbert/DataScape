@@ -90,7 +90,7 @@ tr:nth-child(odd) {
   font-family: Arial;
 }
 
-#TableEditorView > #backgroundViewm, .popupBackground{
+#TableEditorView > #backgroundView, .popupBackground{
   background-color: #E8E8E8;
   border: 1px solid black;
 

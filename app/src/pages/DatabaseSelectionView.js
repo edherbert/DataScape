@@ -1,5 +1,6 @@
 const View = require('./View');
 const DatabaseEditPopup = require('./DatabaseEditPopup');
+const storageManager = require('../StorageManager')
 
 function DatabaseSelectionView(pageManager){
   this.pageManager = pageManager;
@@ -9,24 +10,29 @@ function DatabaseSelectionView(pageManager){
   document.getElementById("dataBaseSelectionView").append(this.list);
 
   document.getElementById("newDbbutton").onclick = this.createDatabase.bind(this);
+
+  this.updateList();
 }
 
 DatabaseSelectionView.prototype = Object.assign(Object.create(View.prototype), {
   constructor: DatabaseSelectionView,
 
   createDatabase: function(){
-    //This will eventually contain a call to the other managers.
-    this.addToList();
+    let title = prompt("What should the database be called?")
+    if(title == null) return;
+    storageManager.createDatabase(title);
+
+    this.addToList(title);
   },
 
-  addToList: function(){
+  addToList: function(dbTitle){
     /*var div = document.createElement('div');
     div.innerHTML = "A database";
     div.className = "DBEntry";
     this.container.appendChild(div);*/
     let newDb = document.createElement('div');
     newDb.className = "DBEntry";
-    newDb.innerHTML = "new Database";
+    newDb.innerHTML = dbTitle;
 
     let editDb = document.createElement('img');
     editDb.className = "DbEditButton";
@@ -53,6 +59,14 @@ DatabaseSelectionView.prototype = Object.assign(Object.create(View.prototype), {
   databaseSelected: function(){
     this.pageManager.loadDatabase();
     this.pageManager.showDiagramView();
+  },
+
+  updateList: function(){
+    let list = storageManager.getDatabasesList();
+
+    for(t = 0; t < list.length; t++){
+      this.addToList(list[t]);
+    }
   }
 });
 
