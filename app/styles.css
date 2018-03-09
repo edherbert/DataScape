@@ -1,5 +1,6 @@
 body{
   margin: 0px;
+  font-family: Arial;
 }
 
 #topBar{
@@ -15,7 +16,7 @@ body{
   letter-spacing: 0.05em;
 }
 
-.view{
+.view, .popup{
   visibility: hidden;
   position: absolute;
   width: 100%;
@@ -60,7 +61,7 @@ table {
     height:100%;
 }
 
-table, .DiagramToolBarItem, .DBEntry{
+table, .DiagramToolBarItem, .DBEntry, #deleteDbButton{
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
   -khtml-user-select: none; /* Konqueror HTML */
@@ -89,7 +90,7 @@ tr:nth-child(odd) {
   font-family: Arial;
 }
 
-#TableEditorView > #backgroundView{
+#TableEditorView > #backgroundViewm, .popupBackground{
   background-color: #E8E8E8;
   border: 1px solid black;
 
@@ -114,16 +115,16 @@ tr:nth-child(odd) {
 }
 
 @keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity:1 ;}
+    from {opacity: 0; visibility: hidden;}
+    to {opacity:1 ; visibility: visible;}
 }
 
 @keyframes fadeOut {
-    from {opacity: 1;}
-    to {opacity:0 ;}
+    from {opacity: 1; visibility: visible;}
+    to {opacity:0 ; visibility: hidden;}
 }
 
-ul > li{
+.DbSelectionList{
   display: block;
   margin-bottom: 1em;
 }
@@ -136,4 +137,41 @@ ul > li{
   cursor: pointer;
 
   background-color: #bcbcbc;
+}
+
+.DBEntry:hover{
+  background-color: #ABABAB;
+}
+
+.DbSelectionList:hover .DbEditButton{
+  display: inline-block;
+}
+
+.DbEditButton{
+  margin-left: 1em;
+  cursor: pointer;
+  display: none;
+}
+
+.popup{
+  --animation: fadeIn 1s;
+}
+
+#deleteDbButton:hover{
+  background-color: #FF5C5C;
+}
+
+#deleteDbButton, #newDbbutton{
+  background-color: #FF6E6E;
+  border-radius: 0.2em;
+  text-align: center;
+  padding: 1em;
+  cursor: pointer;
+}
+
+#newDbbutton{
+  background-color: #bcbcbc;
+  display: inline-block;
+
+  margin: 1em;
 }
