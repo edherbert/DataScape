@@ -8,7 +8,7 @@ function EmailType(){
 EmailType.prototype = Object.assign(Object.create(FieldType.prototype), {
   constructor: EmailType,
 
-  Requirements: ["FirstName"], ["SecondName"],
+  Requirements: ["FirstName", "SecondName"],
 
   generate: function(previous){
     let current = previous;
@@ -18,7 +18,7 @@ EmailType.prototype = Object.assign(Object.create(FieldType.prototype), {
 		let targetEnding = "";
     targetService = this.emailService[Math.floor(Math.random() * this.emailService.length)];
     targetEnding = this.emailEnding[Math.floor(Math.random() * this.emailEnding.length)];
-    current.Email = previous.FirstName ++ previous.SecondName ++ this.emailService ++ this.emailEnding;
+    current.Email = this.FirstName + this.SecondName + this.emailService + this.emailEnding;
 
     return current;
   }
