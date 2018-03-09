@@ -8,6 +8,7 @@ const BooleanType = require('./types/BooleanType');
 const EmailType = require('./types/EmailType');
 const PhoneNumberType = require('./types/PhoneNumberType');
 const TitleType = require('./types/TitleType');
+const AgeType = require('./types/AgeType');
 
 
 
@@ -21,7 +22,8 @@ function TypeManager(){
   this.booleanType = new BooleanType();
   this.emailType = new EmailType();
   this.phoneNumberType = new PhoneNumberType();
-  this.titleType = new titleType();
+  this.titleType = new TitleType();
+  this.ageType = new AgeType();
 }
 
 TypeManager.prototype = {
@@ -57,6 +59,9 @@ TypeManager.prototype = {
         case "Title":
   			  return this.titleType;
   			  break;
+        case "Age":
+          return this.ageType;
+          break;
         default:
           console.log("No type was found for " + fieldTypeName);
           break;
