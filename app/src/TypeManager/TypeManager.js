@@ -5,6 +5,11 @@ const GenderType = require('./types/GenderType');
 const PostcodeType = require('./types/PostcodeType');
 const RandomColourType = require('./types/RandomColourType'); //Reference/including from another class
 const BooleanType = require('./types/BooleanType');
+const EmailType = require('./types/EmailType');
+const PhoneNumberType = require('./types/PhoneNumberType');
+const TitleType = require('./types/TitleType');
+
+
 
 function TypeManager(){
   this.testType = new TestType();
@@ -14,6 +19,9 @@ function TypeManager(){
   this.postcodeType = new PostcodeType();
   this.randomColourType = new RandomColourType();  //creating the instance
   this.booleanType = new BooleanType();
+  this.emailType = new EmailType();
+  this.phoneNumberType = new PhoneNumberType();
+  this.titleType = new titleType();
 }
 
 TypeManager.prototype = {
@@ -40,6 +48,15 @@ TypeManager.prototype = {
 		    case "Boolean":
 			    return this.booleanType;
 			    break;
+        case "Email":
+  			  return this.emailType;
+  			  break;
+        case "PhoneNumber":
+          return this.phoneNumberType;
+          break;
+        case "Title":
+  			  return this.titleType;
+  			  break;
         default:
           console.log("No type was found for " + fieldTypeName);
           break;
