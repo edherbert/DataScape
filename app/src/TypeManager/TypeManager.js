@@ -9,7 +9,7 @@ const EmailType = require('./types/EmailType');
 const PhoneNumberType = require('./types/PhoneNumberType');
 const TitleType = require('./types/TitleType');
 const AgeType = require('./types/AgeType');
-
+const CityType = require('./types/CityType');
 
 
 function TypeManager(){
@@ -24,6 +24,7 @@ function TypeManager(){
   this.phoneNumberType = new PhoneNumberType();
   this.titleType = new TitleType();
   this.ageType = new AgeType();
+  this.cityType = new CityType();
 }
 
 TypeManager.prototype = {
@@ -61,6 +62,9 @@ TypeManager.prototype = {
   			  break;
         case "Age":
           return this.ageType;
+          break;
+        case "City":
+          return this.cityType;
           break;
         default:
           console.log("No type was found for " + fieldTypeName);
