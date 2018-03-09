@@ -4,7 +4,7 @@ function AgeType(){
 }
 
 AgeType.prototype = Object.assign(Object.create(FieldType.prototype), {
-  constructor: Age,
+  constructor: AgeType,
 
   generate: function(previous){
     let current = previous;
@@ -12,7 +12,7 @@ AgeType.prototype = Object.assign(Object.create(FieldType.prototype), {
 
     let target = "";
     target = String(Math.floor(Math.random() * 15) + 85)
-    current.Email = target;
+    current.Age = target;
 
     return current;
   }

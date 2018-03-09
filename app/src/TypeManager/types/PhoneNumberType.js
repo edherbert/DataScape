@@ -4,7 +4,7 @@ function PhoneNumberType(){
 }
 
 PhoneNumberType.prototype = Object.assign(Object.create(FieldType.prototype), {
-  constructor: PhoneNumber,
+  constructor: PhoneNumberType,
 
   generate: function(previous){
     let current = previous;

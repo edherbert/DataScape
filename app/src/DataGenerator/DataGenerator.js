@@ -29,8 +29,13 @@ function DataGenerator(){
           {fieldName: "FirstName", fieldType: "Gender"},
           {fieldName: "Postcode", fieldType: "Postcode"},
           {fieldName: "Postcode", fieldType: "Postcode"},
-		  {fieldName: "Colour", fieldType: "Colour"},
-		  {fieldName: "Boolean", fieldType: "Boolean"},
+    		  {fieldName: "Colour", fieldType: "Colour"},
+    		  {fieldName: "Boolean", fieldType: "Boolean"},
+
+          {fieldName: "title", fieldType: "Title"},
+          {fieldName: "email", fieldType: "Email"},
+          {fieldName: "City", fieldType: "City"},
+          {fieldName: "Age", fieldType: "Age"},
         ]
       },
     ],

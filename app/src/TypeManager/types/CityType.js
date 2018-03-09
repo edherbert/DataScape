@@ -5,7 +5,7 @@ function CityType(){
 }
 
 CityType.prototype = Object.assign(Object.create(FieldType.prototype), {
-  constructor: City,
+  constructor: CityType,
 
   generate: function(previous){
     let current = previous;
