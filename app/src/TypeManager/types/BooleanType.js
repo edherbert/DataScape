@@ -13,9 +13,9 @@ BooleanType.prototype = Object.assign(Object.create(FieldType.prototype), {
 
     let target = "";
     if(Math.random() * 2 <= 1){
-      target = true;
+      target = "true";
     }else{
-      target = false;
+      target = "false";
     }
     current.Boolean = target;
 
