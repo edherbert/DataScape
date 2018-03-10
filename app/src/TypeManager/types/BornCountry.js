@@ -13,7 +13,7 @@ CountryType.prototype = Object.assign(Object.create(FieldType.prototype), {
 
     let target = "";
     target = this.country[Math.floor(Math.random() * this.country.length)]
-    current.country = target;
+    current.BornCountry = target;
 
     return current;
   }

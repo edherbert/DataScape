@@ -1,4 +1,5 @@
 const Popup = require('./Popup');
+const storageManager = require('../StorageManager');
 
 function DatabaseEditPopup(dbId, dbContainer){
   this.setup(dbId, dbContainer);
@@ -7,9 +8,10 @@ function DatabaseEditPopup(dbId, dbContainer){
 DatabaseEditPopup.prototype = Object.assign(Object.create(Popup.prototype), {
   constructor: DatabaseEditPopup,
 
-  speed: 0.7,
+  speed: 0.4,
 
   setup: function(dbId, dbContainer){
+    this.dbId = dbId;
     this.dbContainer = dbContainer;
     Popup.prototype.setup.call(this);
 
@@ -23,6 +25,16 @@ DatabaseEditPopup.prototype = Object.assign(Object.create(Popup.prototype), {
     deleteDatabaseButton.id = "deleteDbButton";
     deleteDatabaseButton.innerHTML = "Delete Database";
 
+    let that = this;
+    deleteDatabaseButton.onclick = function(e){
+      if(confirm("Do you really want to delete this database?")){
+        storageManager.removeDatabase(dbId);
+        //Remove the child from the list
+        that.dbContainer.parentElement.removeChild(that.dbContainer);
+        that.popout();
+      }
+    }
+
     this.backgroundView.append(databaseTitle);
     this.backgroundView.append(this.databaseTitleInput);
     this.backgroundView.append(document.createElement('hr'));
@@ -31,7 +43,11 @@ DatabaseEditPopup.prototype = Object.assign(Object.create(Popup.prototype), {
 
   backgroundPressed: function(){
     this.popout();
-    this.dbContainer.innerHTML = this.databaseTitleInput.value;
+
+    //If the storage manager can correctly update the database then rename it in the graphcs.
+    if(storageManager.renameDatabase(this.dbId, this.databaseTitleInput.value)){
+      this.dbContainer.innerHTML = this.databaseTitleInput.value;
+    }
   }
 });
 

@@ -12,10 +12,27 @@ StorageManager.prototype = {
 
 	removeDatabase: function(databaseName){
 		localStorage.removeItem(databaseName);
+
+		let list = this.getDatabasesList();
+
+		let found = false;
+		for(t = 0; t < list.length; t++){
+			if(list[t] == databaseName){
+				list.splice(t, 1);
+			}
+		}
+
+		this.setDatabasesList(list);
 	},
 
 	retrieveDatabase: function(databaseName){
-		return JSON.parse(localStorage.getItem(databaseName));
+		let retrieved = localStorage.getItem(databaseName);
+		if(retrieved == null){
+			console.log("Can't retrieve database " + databaseName + ".");
+			return null;
+		}else{
+			return JSON.parse(retrieved);
+		}
 	},
 
 	//Create a database and add it to the list
@@ -26,7 +43,39 @@ StorageManager.prototype = {
 
 		this.setDatabasesList(list);
 
-		this.storeDatabase(title, {});
+		let bareDatabase = {
+			tables: [],
+			connectors: []
+		};
+		this.storeDatabase(title, bareDatabase);
+	},
+
+	renameDatabase: function(oldName, newName){
+		let oldDb = this.retrieveDatabase(oldName);
+		let oldList = this.getDatabasesList();
+
+		let found = false;
+		for(t = 0; t < oldList.length; t++){
+			if(oldList[t] == oldName){
+				found = true;
+
+				oldList[t] = newName;
+				break;
+			}
+		}
+
+		//Check to see if that database exists in the databases list as well as if it's key can be found.
+		if(oldDb == null || !found){
+			alert("Cannot rename database as that database does not exist.");
+			return false;
+		}else{
+			console.log("Renaming " + oldName + " to " + newName + ".");
+			this.setDatabasesList(oldList);
+
+			localStorage.removeItem(oldName);
+			this.storeDatabase(newName, oldDb);
+		}
+		return true;
 	},
 
 	setDatabasesList: function(list){
@@ -35,9 +84,18 @@ StorageManager.prototype = {
 
 	getDatabasesList: function(){
 		let list = localStorage.getItem("databasesList");
-		if(list == "" || list == null) list = [];
+		if(list == "" || list == null){
+			list = [];
+		}
 
-		return JSON.parse(list);
+		//If the list cannot be parsed then return an empty array.
+		try{
+			list = JSON.parse(list);
+		}catch(e){
+			list = [];
+		}
+
+		return list;
 	}
 };
 

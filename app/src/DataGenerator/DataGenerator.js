@@ -36,6 +36,7 @@ function DataGenerator(){
           {fieldName: "email", fieldType: "Email"},
           {fieldName: "City", fieldType: "City"},
           {fieldName: "Age", fieldType: "Age"},
+          {fieldName: "BornCountry", fieldType: "BornCountry"},
         ]
       },
     ],

@@ -4,6 +4,7 @@ const DataBaseSelectionView = require('./DatabaseSelectionView')
 const TableEditorView = require('./TableEditorView')
 const dateGenerator = require('../DataGenerator/DataGenerator')
 const structureManager = require('../StructureManager')
+const storageManager = require('../StorageManager')
 
 function PageManager(){
   this.testView = new TestView();
@@ -19,7 +20,12 @@ PageManager.prototype = {
     this.testView.show();
   },
 
-  showDiagramView: function(){
+  showDiagramView: function(dbName){
+    //If no database could be loaded then don't show the view.
+    if(!this.loadDatabase(dbName)) {
+      alert("There was a problem loading this database.");
+      return;
+    }
     this.dataBaseSelectionView.hide();
     this.diagramView.show();
   },
@@ -40,8 +46,12 @@ PageManager.prototype = {
     this.tableEditorView.popout();
   },
 
-  loadDatabase: function(){
-    let testJson = {
+  loadDatabase: function(title){
+    let db = storageManager.retrieveDatabase(title);
+    if(db == null) return false;
+
+
+    /*let testJson = {
       tables: [
         {
           title: "requirements",
@@ -75,13 +85,14 @@ PageManager.prototype = {
       connectors: [
         {originTable: 0, destinationTable: 1, type: "One to many"}
       ]
-    };
+    };*/
 
-    for(i = 0; i < testJson.tables.length; i++){
-      testJson.tables[i].tableId = this.diagramView.createTable(testJson.tables[i]);
+    for(i = 0; i < db.tables.length; i++){
+      db.tables[i].tableId = this.diagramView.createTable(db.tables[i]);
     }
-    structureManager.setStructure(testJson);
+    structureManager.setStructure(db);
 
+    return true;
   }
 };
 

@@ -56,9 +56,8 @@ DatabaseSelectionView.prototype = Object.assign(Object.create(View.prototype), {
     this.list.appendChild(listItem);
   },
 
-  databaseSelected: function(){
-    this.pageManager.loadDatabase();
-    this.pageManager.showDiagramView();
+  databaseSelected: function(e){
+    this.pageManager.showDiagramView(e.target.innerHTML);
   },
 
   updateList: function(){
