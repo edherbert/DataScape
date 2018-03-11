@@ -49,6 +49,7 @@ PageManager.prototype = {
   loadDatabase: function(title){
     let db = storageManager.retrieveDatabase(title);
     if(db == null) return false;
+    this.diagramView.clearDiagram();
 
 
     /*let testJson = {

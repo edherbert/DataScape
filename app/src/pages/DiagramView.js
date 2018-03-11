@@ -189,6 +189,10 @@ DiagramView.prototype = Object.assign(Object.create(View.prototype), {
     this.container.style.visibility = "hidden";
     this.setGraphEnabled(false);
     this.graph.getModel().setVisible(this.graph.getDefaultParent(), false);
+  },
+
+  clearDiagram: function(){
+    this.graph.removeCells(this.graph.getChildVertices(this.graph.getDefaultParent()))
   }
 });
 
