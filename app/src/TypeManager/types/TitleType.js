@@ -1,11 +1,10 @@
 const FieldType = require("../FieldType");
 
 function TitleType(){
-  this.maleTitles = ['Mr', 'Sir'];
+  this.maleTitles = ['Mr'];
   this.femaleTitles = ['Miss', 'Ms', 'Mrs'];
-  this.uncommonTitlesNeutal = ['Dr'];
-  this.uncommonTitlesMale = [];
-  this.uncommonTitlesFemale = [];
+  this.uncommonTitlesMale = ['Dr', 'Sir'];
+  this.uncommonTitlesFemale = ['Dr'];
 }
 
 TitleType.prototype = Object.assign(Object.create(FieldType.prototype), {
@@ -21,14 +20,14 @@ TitleType.prototype = Object.assign(Object.create(FieldType.prototype), {
     let target = "";
     if(previous.Gender == "Male"){
       if(randNum == 0){
-        target = this.uncommonTitlesNeutal[Math.floor(Math.random() * this.uncommonTitlesNeutal.length)];
+        target = this.uncommonTitlesMalel[Math.floor(Math.random() * this.uncommonTitlesMale.length)];
       }
       else{
         target = this.maleTitles[Math.floor(Math.random() * this.maleTitles.length)];
       }
     }else{
       if(randNum == 0){
-        target = this.uncommonTitlesNeutal[Math.floor(Math.random() * this.uncommonTitlesNeutal.length)];
+        target = this.uncommonTitlesFemale[Math.floor(Math.random() * this.uncommonTitlesFemale.length)];
       }
       else{
         target = this.femaleTitles[Math.floor(Math.random() * this.femaleTitles.length)];
