@@ -12,6 +12,7 @@ const AgeType = require('./types/AgeType');
 const CityType = require('./types/CityType');
 const BornCountry = require('./types/BornCountry');
 const ReligionType = require('./types/ReligionType');
+const CountyType = require('./types/CountyType');
 
 function TypeManager(){
   this.testType = new TestType();
@@ -28,6 +29,7 @@ function TypeManager(){
   this.cityType = new CityType();
   this.bornCountry = new BornCountry();
   this.religionType = new ReligionType();
+  this.countyType = new CountyType();
 }
 
 TypeManager.prototype = {
@@ -74,6 +76,9 @@ TypeManager.prototype = {
           break;
         case "Religion":
           return this.religionType;
+          break;
+        case "County":
+          return this.countyType;
           break;
         default:
           console.log("No type was found for " + fieldTypeName);
