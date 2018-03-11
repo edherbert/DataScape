@@ -1,20 +1,26 @@
 const View = require('./View');
 const dataGenerator = require('../DataGenerator/DataGenerator')
 const structureManager = require('../StructureManager')
+const storageManager = require('../StorageManager')
 
 function DiagramView(pageManager){
   this.container = document.getElementById("DiagramView");
   this.pageManager = pageManager;
 
+  this.saveButton = document.getElementById("saveDatabaseButton");
+
   document.getElementById("createTableButton").onclick = this.createTableButton.bind(this);
   document.getElementById("returnToSelectionButton").onclick = this.returnToSelection.bind(this);
   document.getElementById("generateDataButton").onclick = this.generateDataButtonPressed.bind(this);
+  this.saveButton.onclick = this.saveDatabasePressed.bind(this);
 
   this.setupMxGraph();
 }
 
 constructor: DiagramView,
 DiagramView.prototype = Object.assign(Object.create(View.prototype), {
+
+  currentDbName: "",
 
   setupMxGraph: function(){
 		mxConnectionHandler.prototype.connectImage = new mxImage('connector.gif', 16, 16);
@@ -53,6 +59,12 @@ DiagramView.prototype = Object.assign(Object.create(View.prototype), {
     //var v2 = this.graph.insertVertex(parent, null, this.generateTableHTML('Clients'), 100, 100, 200, 200, 'TABLE_STYLE');
     //var e1 = this.graph.insertEdge(parent, null, '', v1, v2, 'EDGE_STYLE');
 
+    this.addCallbacks();
+
+    this.graph.getModel().endUpdate();
+  },
+
+  addCallbacks: function(){
     var that = this;
     var keyHandler = new mxKeyHandler(this.graph);
     keyHandler.bindKey(46, function(evt)
@@ -72,7 +84,33 @@ DiagramView.prototype = Object.assign(Object.create(View.prototype), {
         }
     });
 
-    this.graph.getModel().endUpdate();
+    //This'll probably run on loading so this'll need to be fixed for then.
+    this.graph.addListener(mxEvent.CELLS_ADDED, function(sender, evt){
+      console.log("Cell Added");
+      that.dirtySaveButton();
+    });
+
+    this.graph.addListener(mxEvent.CELLS_MOVED, function(sender, evt){
+      console.log("Cell Moved");
+      that.dirtySaveButton();
+
+      console.log(evt);
+      for(t = 0; t < evt.properties.cells.length; t++){
+        if(evt.properties.cells[t].edge) continue; //For now
+
+        structureManager.setTablePosition(evt.properties.cells[t].id, evt.properties.cells[t].geometry.x, evt.properties.cells[t].geometry.y);
+      }
+    });
+
+    this.graph.addListener(mxEvent.CELLS_RESIZED, function(sender, evt){
+      console.log("Cell Resized");
+      that.dirtySaveButton();
+    });
+
+    this.graph.addListener(mxEvent.CELLS_REMOVED, function(sender, evt){
+      console.log("Cell deleted");
+      that.dirtySaveButton();
+    });
   },
 
   createTableButton: function(){
@@ -125,7 +163,23 @@ DiagramView.prototype = Object.assign(Object.create(View.prototype), {
     this.graph.refresh();
   },
 
-  show: function(){
+  dirtySaveButton: function(){
+    this.saveButton.style.backgroundColor = "#ED8291";
+  },
+
+  cleanSaveButton: function(){
+    this.saveButton.style.backgroundColor = "#bcbcbc";
+  },
+
+  saveDatabasePressed: function(){
+    this.cleanSaveButton();
+
+    storageManager.saveDatabaseStructure(this.currentDbName);
+  },
+
+  show: function(dbName){
+    this.cleanSaveButton();
+    this.currentDbName = dbName;
     this.container.style.visibility = "visible";
     this.setGraphEnabled(true);
     this.graph.getModel().setVisible(this.graph.getDefaultParent(), true);

@@ -1,3 +1,5 @@
+const structureManager = require('./StructureManager');
+
 var StorageManager = function (){
 
 }
@@ -96,6 +98,10 @@ StorageManager.prototype = {
 		}
 
 		return list;
+	},
+
+	saveDatabaseStructure: function(dbName){
+		this.storeDatabase(dbName, structureManager.getStructure());
 	}
 };
 

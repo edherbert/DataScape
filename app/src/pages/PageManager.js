@@ -27,7 +27,7 @@ PageManager.prototype = {
       return;
     }
     this.dataBaseSelectionView.hide();
-    this.diagramView.show();
+    this.diagramView.show(dbName);
   },
 
   showDatabaseSelectionView: function(){

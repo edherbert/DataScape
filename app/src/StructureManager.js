@@ -39,6 +39,11 @@ StructureManager.prototype = {
 
   pushTable: function(table){
     this.structure.tables.push(table);
+  },
+
+  setTablePosition: function(id, x, y){
+    this.structure.tables[this.getTableIndexById(id)].x = x;
+    this.structure.tables[this.getTableIndexById(id)].y = y;
   }
 };
 
