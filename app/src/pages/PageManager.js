@@ -1,16 +1,18 @@
 const TestView = require('./TestView');
 const DiagramView = require('./DiagramView');
-const DataBaseSelectionView = require('./DatabaseSelectionView')
-const TableEditorView = require('./TableEditorView')
-const dateGenerator = require('../DataGenerator/DataGenerator')
-const structureManager = require('../StructureManager')
-const storageManager = require('../StorageManager')
+const DataBaseSelectionView = require('./DatabaseSelectionView');
+const TableEditorView = require('./TableEditorView');
+const dateGenerator = require('../DataGenerator/DataGenerator');
+const structureManager = require('../StructureManager');
+const storageManager = require('../StorageManager');
+const DatabaseCreationPopup = require('./DatabaseCreationPopup');
 
 function PageManager(){
   this.testView = new TestView();
   this.diagramView = new DiagramView(this);
   this.dataBaseSelectionView = new DataBaseSelectionView(this);
   this.tableEditorView = new TableEditorView(this);
+  this.databaseCreationPopup = new DatabaseCreationPopup(this);
 }
 
 PageManager.prototype = {
@@ -94,6 +96,10 @@ PageManager.prototype = {
     structureManager.setStructure(db);
 
     return true;
+  },
+
+  popupDatabaseCreation: function(){
+    this.databaseCreationPopup.popup(this);
   }
 };
 

@@ -11,7 +11,7 @@ AgeType.prototype = Object.assign(Object.create(FieldType.prototype), {
     if(typeof previous == 'undefined') current = {};
 
     let target = "";
-    target = String(Math.floor(Math.random() * 15) + 85)
+    target = String(Math.floor(Math.random() * 60) + 15)
     current.Age = target;
 
     return current;

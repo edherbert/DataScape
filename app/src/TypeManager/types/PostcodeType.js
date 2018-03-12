@@ -16,10 +16,10 @@ PostcodeType.prototype = Object.assign(Object.create(FieldType.prototype), {
     let target = "";
     let cityCode = previous.City.substring(0,2).toUpperCase();
     let randChar = this.characters[Math.floor(Math.random() * this.characters.length)];
-    let randChars = this.randChar + this.randChar;
+    let randChars = randChar + randChar;
     let randNum = String(Math.floor(Math.random() * 9))
 
-    target = this.cityCode + this.randNum + " " + this.randNum + this.randChars
+    target = cityCode + randNum + " " + randNum + randChars;
 
     current.Postcode = target;
     return current;

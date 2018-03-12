@@ -1,6 +1,7 @@
 const View = require('./View');
 const DatabaseEditPopup = require('./DatabaseEditPopup');
-const storageManager = require('../StorageManager')
+const storageManager = require('../StorageManager');
+const DatabaseCreationPopup = require('./DatabaseCreationPopup');
 
 function DatabaseSelectionView(pageManager){
   this.pageManager = pageManager;
@@ -11,6 +12,7 @@ function DatabaseSelectionView(pageManager){
 
   document.getElementById("newDbbutton").onclick = this.createDatabase.bind(this);
 
+
   this.updateList();
 }
 
@@ -18,7 +20,9 @@ DatabaseSelectionView.prototype = Object.assign(Object.create(View.prototype), {
   constructor: DatabaseSelectionView,
 
   createDatabase: function(){
-    let title = prompt("What should the database be called?")
+    //let title = prompt("What should the database be called?")
+    let title = null;
+    this.pageManager.popupDatabaseCreation();
     if(title == null) return;
     storageManager.createDatabase(title);
 
@@ -44,6 +48,7 @@ DatabaseSelectionView.prototype = Object.assign(Object.create(View.prototype), {
       let databaseEdit = new DatabaseEditPopup(dbContainer.innerHTML, dbContainer);
       databaseEdit.popup();
     }
+
 
     newDb.onclick = this.databaseSelected.bind(this);
 
