@@ -8,7 +8,7 @@ function EmailType(){
 EmailType.prototype = Object.assign(Object.create(FieldType.prototype), {
   constructor: EmailType,
 
-  Requirements: ["FirstName", "SecondName"],
+  Requirements: ["First Name", "Second Name"],
 
   generate: function(previous){
     let current = previous;

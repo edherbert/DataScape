@@ -1,5 +1,5 @@
 const View = require('./View');
-const structureManager = require('../StructureManager')
+const structureManager = require('../StructureManager');
 
 function TableEditorView(pageManager){
   this.pageManager = pageManager;
@@ -88,11 +88,11 @@ TableEditorView.prototype = Object.assign(Object.create(View.prototype), {
     typeButton.className = "FieldTypeButton";
     second.append(typeButton);
 
+    let that = this;
     typeButton.onclick = function(e){
-      console.log("hello");
+      that.pageManager.popupTypeSelection(e.target);
     }
 
-    let that = this;
     image.onclick = function(e){
       //Get the parent's parent of the clicked element (the row) and remove it.
       let targetRow = e.target.parentElement.parentElement;
@@ -111,7 +111,7 @@ TableEditorView.prototype = Object.assign(Object.create(View.prototype), {
     }
 
     this.nameBoxes.push(nameInput);
-    this.typeBoxes.push(second.innerHTML);
+    this.typeBoxes.push(typeButton);
 
     row.append(first);
     row.append(second);
@@ -123,7 +123,7 @@ TableEditorView.prototype = Object.assign(Object.create(View.prototype), {
     let tempTable = [];
 
     for(t = 0; t < this.nameBoxes.length; t++){
-      tempTable.push({fieldName: this.nameBoxes[t].value, fieldType: this.typeBoxes[t]});
+      tempTable.push({fieldName: this.nameBoxes[t].value, fieldType: this.typeBoxes[t].innerHTML});
     }
 
     structureManager.setTableTitle(this.currentId, this.tableTitleInput.value);

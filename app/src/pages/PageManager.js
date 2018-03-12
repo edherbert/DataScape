@@ -50,8 +50,8 @@ PageManager.prototype = {
     this.tableEditorView.popout();
   },
 
-  popupTypeSelection: function(){
-    this.typeSelectionPopup.popup();
+  popupTypeSelection: function(typeContainer){
+    this.typeSelectionPopup.popup(typeContainer);
   },
 
   popoutTypeSelection: function(){

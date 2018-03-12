@@ -1,4 +1,5 @@
 const Popup = require('./Popup');
+const typeManager = require('../TypeManager/TypeManager');
 
 function TypeSelectionPopup(pageManager){
   this.pageManager = pageManager;
@@ -16,22 +17,39 @@ TypeSelectionPopup.prototype = Object.assign(Object.create(Popup.prototype), {
     let container = document.createElement('div');
     container.id = "fieldTypeContainer";
 
-    for(t = 0; t < 100; t++){
-      let thing = document.createElement('div');
-      thing.innerHTML = "hello";
+    let list = typeManager.getTypesList();
+
+    for(t = 0; t < list.length; t++){
+      let item = document.createElement('div');
+      item.innerHTML = list[t];
+      item.id = "TypeListItem";
 
       let row = Math.floor(t / 3);
       let column = t % 3;
-      console.log(row + "   " + column);
-      thing.style['grid-row'] = row;
-      thing.style['grid-column'] = column;
-      thing.style['background-color'] = "red";
-      container.append(thing);
+
+      item.style['grid-row'] = row;
+      item.style['grid-column'] = column;
+
+      let that = this;
+      item.onclick = function(e){
+        console.log(e.target.innerHTML);
+        that.typeContainer.innerHTML = e.target.innerHTML;
+
+        that.pageManager.popoutTypeSelection();
+        that.pageManager.dirtyDiagramSaveButton();
+      }
+
+      container.append(item);
     }
 
 
     this.backgroundView.append(title);
     this.backgroundView.append(container);
+  },
+
+  popup: function(typeContainer){
+    Popup.prototype.popup.call(this);
+    this.typeContainer = typeContainer;
   },
 
   backgroundPressed: function(){

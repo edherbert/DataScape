@@ -61,7 +61,7 @@ table {
     height:100%;
 }
 
-table, .DiagramToolBarItem, .DBEntry, #deleteDbButton{
+table, .DiagramToolBarItem, .DBEntry, #deleteDbButton, #TypeListItem{
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
   -khtml-user-select: none; /* Konqueror HTML */
@@ -194,7 +194,7 @@ tr:nth-child(odd) {
 
 #declineDbButton{
   display: inline-block;
-  background-color: #ff0000;
+  background-color: #FF6E6E;
   border-radius: 0.2em;
   text-align: center;
   padding: 0.5em;
@@ -224,4 +224,14 @@ tr:nth-child(odd) {
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 10px;
   grid-auto-rows: minmax(100px, auto);
+}
+
+#TypeListItem{
+  background-color: #bcbcbc;
+  cursor: pointer;
+  text-align: center;
+}
+
+#TypeListItem:hover{
+  background-color: #ABABAB;
 }

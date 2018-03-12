@@ -9,16 +9,16 @@ function DataGenerator(){
 
   //This will be removed in the final version.
   //It's just to show what the input could look like.
-  this.testJson = {
+  /*this.testJson = {
     tables: [
       {
         title: "requirements",
         requiredAmmount: 10,
         types: [
-          {fieldName: "SecondName", fieldType: "SecondName"},
+          {fieldName: "SecondName", fieldType: "Second Name"},
           {fieldName: "Gender", fieldType: "Gender"},
           {fieldName: "Gender_Second", fieldType: "Gender"},
-          {fieldName: "FirstName", fieldType: "FirstName"},
+          {fieldName: "FirstName", fieldType: "First Name"},
           {fieldName: "testKey", fieldType: "ForeignKey", tableId: 1}
         ]
       },
@@ -29,14 +29,50 @@ function DataGenerator(){
           {fieldName: "FirstName", fieldType: "Gender"},
           {fieldName: "Postcode", fieldType: "Postcode"},
           {fieldName: "Postcode", fieldType: "Postcode"},
-    		  {fieldName: "Colour", fieldType: "Colour"},
+    		  {fieldName: "Colour", fieldType: "Random Colour"},
     		  {fieldName: "Boolean", fieldType: "Boolean"},
 
           {fieldName: "title", fieldType: "Title"},
           {fieldName: "email", fieldType: "Email"},
           {fieldName: "City", fieldType: "City"},
           {fieldName: "Age", fieldType: "Age"},
-          {fieldName: "BornCountry", fieldType: "BornCountry"},
+          {fieldName: "BornCountry", fieldType: "Born Country"}
+        ]
+      },
+    ],
+    connectors: [
+      {originTable: 0, destinationTable: 1, type: "One to many"}
+    ]
+  };*/
+
+  this.testJson = {
+    tables: [
+      {
+        title: "requirements",
+        requiredAmmount: 10,
+        types: [
+          {fieldName: "SecondName", fieldType: "Second Name"},
+          {fieldName: "Gender", fieldType: "Gender"},
+          {fieldName: "Gender_Second", fieldType: "Gender"},
+          {fieldName: "FirstName", fieldType: "First Name"},
+          {fieldName: "testKey", fieldType: "ForeignKey", tableId: 1}
+        ]
+      },
+      {
+        title: "AnotherTest",
+        requiredAmmount: 10,
+        types: [
+          {fieldName: "FirstName", fieldType: "Gender"},
+          {fieldName: "Postcode", fieldType: "Postcode"},
+          {fieldName: "Postcode", fieldType: "Postcode"},
+    		  {fieldName: "Colour", fieldType: "Random Colour"},
+    		  {fieldName: "Boolean", fieldType: "Boolean"},
+
+          {fieldName: "title", fieldType: "Title"},
+          {fieldName: "email", fieldType: "Email"},
+          {fieldName: "City", fieldType: "City"},
+          {fieldName: "Age", fieldType: "Age"},
+          {fieldName: "BornCountry", fieldType: "Born Country"},
         ]
       },
     ],

@@ -5,7 +5,7 @@ const dataGenerator = require("./DataGenerator/DataGenerator")
 //pageManager.popupTableEditorView();
 pageManager.showDatabaseSelectionView();
 
-pageManager.popupTypeSelection();
+//pageManager.popupTypeSelection();
 /*storageManager.setDatabasesList(["New Database", "Something else"]);
 console.log(storageManager.getDatabasesList());
 storageManager.storeDatabase({title: "testTable"});

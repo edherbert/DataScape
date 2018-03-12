@@ -8,6 +8,7 @@ TableParser.prototype = {
   constructor: TableParser,
 
   parseStructure: function(structure){
+    console.log(structure);
     for(t = 0; t < structure.tables.length; t++){
       requirements = [];
       for(i = 0; i < structure.tables[t].types.length; i++){

@@ -27,9 +27,11 @@ function TypeManager(){
   this.titleType = new TitleType();
   this.ageType = new AgeType();
   this.cityType = new CityType();
-  this.bornCountry = new BornCountry();
+  this.bornCountryType = new BornCountry();
   this.religionType = new ReligionType();
   this.countyType = new CountyType();
+
+  this.typeNames = ["First Name", "Second Name", "Gender", "Postcode", "Random Colour", "Boolean", "Email", "Phone Number", "Title", "Age", "City", "Born Country", "Religion", "County"];
 }
 
 TypeManager.prototype = {
@@ -38,10 +40,10 @@ TypeManager.prototype = {
         case "TestType":
           return this.testType;
           break;
-        case "FirstName":
+        case "First Name":
           return this.firstNameType;
           break;
-        case "SecondName":
+        case "Second Name":
           return this.secondNameType;
           break;
         case "Gender":
@@ -50,7 +52,7 @@ TypeManager.prototype = {
         case "Postcode":
           return this.postcodeType;
           break;
-		    case "Colour":
+		    case "Random Colour":
 		      return this.randomColourType;
 		      break; //Break is used to stop it from searching when its found the data
 		    case "Boolean":
@@ -59,7 +61,7 @@ TypeManager.prototype = {
         case "Email":
   			  return this.emailType;
   			  break;
-        case "PhoneNumber":
+        case "Phone Number":
           return this.phoneNumberType;
           break;
         case "Title":
@@ -71,8 +73,8 @@ TypeManager.prototype = {
         case "City":
           return this.cityType;
           break;
-        case "BornCountry":
-          return this.bornCountry;
+        case "Born Country":
+          return this.bornCountryType;
           break;
         case "Religion":
           return this.religionType;
@@ -88,6 +90,10 @@ TypeManager.prototype = {
 
   getRequirements: function(fieldTypeName){
     return this.getFieldType(fieldTypeName).Requirements;
+  },
+
+  getTypesList: function(){
+    return this.typeNames;
   }
 };
 
