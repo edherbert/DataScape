@@ -200,3 +200,14 @@ tr:nth-child(odd) {
   cursor: pointer;
 
 }
+
+.FieldTypeButton{
+  background-color: #ABABAB;
+  padding: 0.2em;
+  cursor: pointer;
+  text-align: center;
+}
+
+.FieldRemoveCross{
+  cursor: pointer;
+}

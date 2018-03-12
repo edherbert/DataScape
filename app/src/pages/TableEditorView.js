@@ -73,17 +73,49 @@ TableEditorView.prototype = Object.assign(Object.create(View.prototype), {
     var first = document.createElement('td');
     var second = document.createElement('td');
 
-    var nameInput = document.createElement('input');
+    var third = document.createElement('td');
+    let image = document.createElement('img');
+    image.src = "cross.png";
+    image.className = "FieldRemoveCross";
+    third.append(image);
+
+    let nameInput = document.createElement('input');
     nameInput.value = name;
     first.append(nameInput);
 
-    second.innerHTML = fieldType;
+    let typeButton = document.createElement('div');
+    typeButton.innerHTML = fieldType;
+    typeButton.className = "FieldTypeButton";
+    second.append(typeButton);
+
+    typeButton.onclick = function(e){
+      console.log("hello");
+    }
+
+    let that = this;
+    image.onclick = function(e){
+      //Get the parent's parent of the clicked element (the row) and remove it.
+      let targetRow = e.target.parentElement.parentElement;
+      that.table.removeChild(targetRow);
+
+      //Remove it from the name and type boxes.
+      for(t = 0; t < that.nameBoxes.length; t++){
+        //Check if the name box's row is the same as the one to delete.
+        if(that.nameBoxes[t].parentElement.parentElement == targetRow){
+          that.nameBoxes.splice(t, 1);
+          that.typeBoxes.splice(t, 1);
+          break;
+        }
+      }
+      that.changeMade();
+    }
 
     this.nameBoxes.push(nameInput);
     this.typeBoxes.push(second.innerHTML);
 
     row.append(first);
     row.append(second);
+    row.append(third);
     this.table.append(row);
   },
 
@@ -120,7 +152,7 @@ TableEditorView.prototype = Object.assign(Object.create(View.prototype), {
   },
 
   newRowButtonPressed: function(){
-    this.newRow();
+    this.newRow("", "Field Type");
     this.changeMade();
   },
 
