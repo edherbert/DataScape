@@ -27,15 +27,22 @@ DatabaseCreationPopup.prototype = Object.assign(Object.create(Popup.prototype), 
 
     let declineDbButton = document.createElement('div');
     declineDbButton.id = "declineDbButton";
-    declineDbButton.innerHTML = "Decline";
+    declineDbButton.innerHTML = "Cancel";
 
     let that = this;
     acceptDbButton.onclick = function(e){
-      that.dbSelectionView.addToList(that.databaseTitleInput.value);
-      storageManager.createDatabase(that.databaseTitleInput.value);
-      that.popout();
+      if (that.databaseTitleInput.value != ""){
+        that.dbSelectionView.addToList(that.databaseTitleInput.value);
+        storageManager.createDatabase(that.databaseTitleInput.value);
+        that.popout();
+      }else{
+        that.popout();
+      }
     }
 
+    declineDbButton.onclick = function(e){
+      that.popout();
+    }
 
     this.backgroundView.append(databaseTitle);
     this.backgroundView.append(this.databaseTitleInput);
