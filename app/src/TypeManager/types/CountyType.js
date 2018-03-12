@@ -44,10 +44,10 @@ CountyType.prototype = Object.assign(Object.create(FieldType.prototype), {
       target = "Dorset";
     }
 
-    current.City = target;
+    current.County = target;
 
     return current;
   }
 });
 
-module.exports = CityType;
+module.exports = CountyType;
