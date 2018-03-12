@@ -31,10 +31,20 @@ DatabaseCreationPopup.prototype = Object.assign(Object.create(Popup.prototype), 
 
     let that = this;
     acceptDbButton.onclick = function(e){
-      that.dbSelectionView.addToList(that.databaseTitleInput.value);
-      storageManager.createDatabase(that.databaseTitleInput.value);
+      if(that.databaseTitleInput.value != ""){
+        that.dbSelectionView.addToList(that.databaseTitleInput.value);
+        storageManager.createDatabase(that.databaseTitleInput.value);
+        that.popout();
+      }else{
+        that.popout();
+      }
+    }
+
+    declineDbButton.onclick = function(e){
       that.popout();
     }
+
+
 
 
     this.backgroundView.append(databaseTitle);
