@@ -212,3 +212,16 @@ tr:nth-child(odd) {
 .FieldRemoveCross{
   cursor: pointer;
 }
+
+#fieldTypeContainer{
+  margin-top: 1em;
+  border: 1px solid #000;
+  height: 20em;
+  background: white;
+  overflow: scroll;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+}

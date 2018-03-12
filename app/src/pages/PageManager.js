@@ -6,6 +6,7 @@ const dateGenerator = require('../DataGenerator/DataGenerator');
 const structureManager = require('../StructureManager');
 const storageManager = require('../StorageManager');
 const DatabaseCreationPopup = require('./DatabaseCreationPopup');
+const TypeSelectionPopup = require('./TypeSelectionPopup');
 
 function PageManager(){
   this.testView = new TestView();
@@ -13,6 +14,7 @@ function PageManager(){
   this.dataBaseSelectionView = new DataBaseSelectionView(this);
   this.tableEditorView = new TableEditorView(this);
   this.databaseCreationPopup = new DatabaseCreationPopup(this);
+  this.typeSelectionPopup = new TypeSelectionPopup(this);
 }
 
 PageManager.prototype = {
@@ -46,6 +48,14 @@ PageManager.prototype = {
     this.diagramView.setGraphEnabled(true);
     this.diagramView.updateTable(this.tableEditorView.currentId);
     this.tableEditorView.popout();
+  },
+
+  popupTypeSelection: function(){
+    this.typeSelectionPopup.popup();
+  },
+
+  popoutTypeSelection: function(){
+    this.typeSelectionPopup.popout();
   },
 
   loadDatabase: function(title){
@@ -105,7 +115,7 @@ PageManager.prototype = {
 
   dirtyDiagramSaveButton: function(){
     this.diagramView.dirtySaveButton();
-  }
+  },
 
 };
 
