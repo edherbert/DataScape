@@ -21,12 +21,7 @@ DatabaseSelectionView.prototype = Object.assign(Object.create(View.prototype), {
 
   createDatabase: function(){
     //let title = prompt("What should the database be called?")
-    let title = null;
-    this.pageManager.popupDatabaseCreation();
-    if(title == null) return;
-    storageManager.createDatabase(title);
-
-    this.addToList(title);
+    this.pageManager.popupDatabaseCreation(this);
   },
 
   addToList: function(dbTitle){

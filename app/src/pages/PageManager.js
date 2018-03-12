@@ -98,9 +98,11 @@ PageManager.prototype = {
     return true;
   },
 
-  popupDatabaseCreation: function(){
+  popupDatabaseCreation: function(dbSelectionView){
+    this.databaseCreationPopup.dbSelectionView = dbSelectionView;
     this.databaseCreationPopup.popup(this);
   }
+
 };
 
 module.exports = new PageManager();

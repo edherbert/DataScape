@@ -179,3 +179,24 @@ tr:nth-child(odd) {
 #newDbbutton:hover{
   background-color: #ABABAB;
 }
+
+#acceptDbButton{
+  display: inline-block;
+  background-color: #32CD32;
+  border-radius: 0.2em;
+  text-align: center;
+  padding: 0.5em;
+  cursor: pointer;
+  margin-right: 8px;
+  margin-left: 8px;
+}
+
+#declineDbButton{
+  display: inline-block;
+  background-color: #ff0000;
+  border-radius: 0.2em;
+  text-align: center;
+  padding: 0.5em;
+  cursor: pointer;
+
+}

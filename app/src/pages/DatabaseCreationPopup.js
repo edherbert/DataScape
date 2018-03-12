@@ -15,14 +15,32 @@ DatabaseCreationPopup.prototype = Object.assign(Object.create(Popup.prototype), 
 
   setup: function(){
     Popup.prototype.setup.call(this);
-    console.log("hello");
+
     let databaseTitle = document.createElement('div');
     databaseTitle.innerHTML = "What should the database be called?";
 
     this.databaseTitleInput = document.createElement('input');
-    //let title = this.databaseTitleInput.value;
-    //storageManager.createDatabase(title);
+
+    let acceptDbButton = document.createElement('div');
+    acceptDbButton.id = "acceptDbButton";
+    acceptDbButton.innerHTML = "Confirm";
+
+    let declineDbButton = document.createElement('div');
+    declineDbButton.id = "declineDbButton";
+    declineDbButton.innerHTML = "Decline";
+
+    let that = this;
+    acceptDbButton.onclick = function(e){
+      that.dbSelectionView.addToList(that.databaseTitleInput.value);
+      storageManager.createDatabase(that.databaseTitleInput.value);
+      that.popout();
+    }
+
+
     this.backgroundView.append(databaseTitle);
+    this.backgroundView.append(this.databaseTitleInput);
+    this.backgroundView.append(acceptDbButton);
+    this.backgroundView.append(declineDbButton);
   }
 });
 
