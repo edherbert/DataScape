@@ -74,12 +74,10 @@ DiagramView.prototype = Object.assign(Object.create(View.prototype), {
         that.graph.removeCells();
       }
     });
+
     this.graph.addListener(mxEvent.DOUBLE_CLICK, function(sender, evt){
       	var cell = evt.getProperty('cell');
         if(cell!=null){
-          //console.log(cell.id);
-          //console.log(cell.getValue());
-
           that.pageManager.popupTableEditorView(cell.getId());
         }
     });
@@ -87,6 +85,7 @@ DiagramView.prototype = Object.assign(Object.create(View.prototype), {
     //This'll probably run on loading so this'll need to be fixed for then.
     this.graph.addListener(mxEvent.CELLS_ADDED, function(sender, evt){
       console.log("Cell Added");
+      //tables are added to the strucutre manager somewhere else in the project, so I don't need to do it here.
       that.dirtySaveButton();
     });
 
@@ -94,7 +93,6 @@ DiagramView.prototype = Object.assign(Object.create(View.prototype), {
       console.log("Cell Moved");
       that.dirtySaveButton();
 
-      console.log(evt);
       for(t = 0; t < evt.properties.cells.length; t++){
         if(evt.properties.cells[t].edge) continue; //For now
 
@@ -105,11 +103,22 @@ DiagramView.prototype = Object.assign(Object.create(View.prototype), {
     this.graph.addListener(mxEvent.CELLS_RESIZED, function(sender, evt){
       console.log("Cell Resized");
       that.dirtySaveButton();
+
+      console.log(evt);
+      for(t = 0; t < evt.properties.cells.length; t++){
+        if(evt.properties.cells[t].edge) continue; //For now
+
+        structureManager.setTableSize(evt.properties.cells[t].id, evt.properties.cells[t].geometry.width, evt.properties.cells[t].geometry.height);
+      }
     });
 
     this.graph.addListener(mxEvent.CELLS_REMOVED, function(sender, evt){
       console.log("Cell deleted");
       that.dirtySaveButton();
+
+      for(t = 0; t < evt.properties.cells.length; t++){
+        structureManager.removeTable(evt.properties.cells[t].id);
+      }
     });
   },
 

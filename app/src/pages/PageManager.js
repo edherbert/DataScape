@@ -101,6 +101,10 @@ PageManager.prototype = {
   popupDatabaseCreation: function(dbSelectionView){
     this.databaseCreationPopup.dbSelectionView = dbSelectionView;
     this.databaseCreationPopup.popup(this);
+  },
+
+  dirtyDiagramSaveButton: function(){
+    this.diagramView.dirtySaveButton();
   }
 
 };

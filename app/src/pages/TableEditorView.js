@@ -8,6 +8,11 @@ function TableEditorView(pageManager){
   this.tableContainer = document.getElementById("TableEditorTableContainer");
   this.tableTitleInput = document.getElementById("tableTitleField");
 
+  let that = this;
+  this.tableTitleInput.oninput = function(){
+    that.changeMade();
+  };
+
   this.currentId = 0;
 
   this.nameBoxes = [];
@@ -116,6 +121,11 @@ TableEditorView.prototype = Object.assign(Object.create(View.prototype), {
 
   newRowButtonPressed: function(){
     this.newRow();
+    this.changeMade();
+  },
+
+  changeMade: function(){
+    this.pageManager.dirtyDiagramSaveButton();
   }
 });
 

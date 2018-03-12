@@ -42,8 +42,20 @@ StructureManager.prototype = {
   },
 
   setTablePosition: function(id, x, y){
-    this.structure.tables[this.getTableIndexById(id)].x = x;
-    this.structure.tables[this.getTableIndexById(id)].y = y;
+    let tableIndex = this.getTableIndexById(id);
+    this.structure.tables[tableIndex].x = x;
+    this.structure.tables[tableIndex].y = y;
+  },
+
+  setTableSize: function(id, width, height){
+    let tableIndex = this.getTableIndexById(id);
+    this.structure.tables[tableIndex].width = width;
+    this.structure.tables[tableIndex].height = height;
+  },
+
+  removeTable: function(id){
+    let tableIndex = this.getTableIndexById(id);
+    this.structure.tables.splice(tableIndex, 1);
   }
 };
 
