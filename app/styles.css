@@ -133,6 +133,7 @@ tr:nth-child(odd) {
   font-family: Arial;
   padding: 0.7em;
   font-size: 15pt;
+  border-radius: 0.2em;
   display: inline-block;
   cursor: pointer;
 
