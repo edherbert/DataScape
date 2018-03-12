@@ -27,7 +27,7 @@ DatabaseCreationPopup.prototype = Object.assign(Object.create(Popup.prototype), 
 
     let declineDbButton = document.createElement('div');
     declineDbButton.id = "declineDbButton";
-    declineDbButton.innerHTML = "Decline";
+    declineDbButton.innerHTML = "Cancel";
 
     let that = this;
     acceptDbButton.onclick = function(e){
