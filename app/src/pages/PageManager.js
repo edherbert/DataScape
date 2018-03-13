@@ -7,6 +7,7 @@ const structureManager = require('../StructureManager');
 const storageManager = require('../StorageManager');
 const DatabaseCreationPopup = require('./DatabaseCreationPopup');
 const TypeSelectionPopup = require('./TypeSelectionPopup');
+//const ConfirmDeletePopup = require('./ConfirmDeletePopup');
 
 function PageManager(){
   this.testView = new TestView();
@@ -15,6 +16,7 @@ function PageManager(){
   this.tableEditorView = new TableEditorView(this);
   this.databaseCreationPopup = new DatabaseCreationPopup(this);
   this.typeSelectionPopup = new TypeSelectionPopup(this);
+  //this.confirmDeletePopup = new ConfirmDeletePopup();
 }
 
 PageManager.prototype = {
@@ -113,10 +115,10 @@ PageManager.prototype = {
     this.databaseCreationPopup.popup(this);
   },
 
-  // popupConfirmDelete: function(dbSelectionView){
-  //   this.confirmDeletePopup.dbSelectionView = dbSelectionView;
-  //   this.confirmDeletePopup.popup(this);
+  // popupConfirmDelete: function(dbId, dbContainer){
+  //   this.confirmDeletePopup.popup(dbId, dbContainer);
   // },
+
 
   dirtyDiagramSaveButton: function(){
     this.diagramView.dirtySaveButton();

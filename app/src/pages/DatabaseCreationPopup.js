@@ -1,5 +1,5 @@
 const View = require('./View');
-const DatabaseEditPopup = require('./DatabaseEditPopup');
+const databaseEditPopup = require('./DatabaseEditPopup');
 const storageManager = require('../StorageManager')
 const Popup = require('./Popup');
 

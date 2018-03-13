@@ -1,5 +1,7 @@
 const Popup = require('./Popup');
 const storageManager = require('../StorageManager');
+//const confirmDeletePopup = require('./ConfirmDeletePopup');
+//const pageManager = require('./PageManager');
 
 function DatabaseEditPopup(dbId, dbContainer){
   this.setup(dbId, dbContainer);
@@ -27,12 +29,14 @@ DatabaseEditPopup.prototype = Object.assign(Object.create(Popup.prototype), {
 
     let that = this;
     deleteDatabaseButton.onclick = function(e){
-      if(confirm("Do you really want to delete this database?")){
-        storageManager.removeDatabase(dbId);
-        //Remove the child from the list
-        that.dbContainer.parentElement.removeChild(that.dbContainer);
-        that.popout();
-      }
+      // if(confirm("Do you really want to delete this database?")){
+      //   storageManager.removeDatabase(dbId);
+      //   //Remove the child from the list
+      //   that.dbContainer.parentElement.removeChild(that.dbContainer);
+      //   that.popout();
+      // }
+      that.popout();
+      //pageManager.popupConfirmDelete(dbId, dbContainer);
     }
 
     this.backgroundView.append(databaseTitle);
