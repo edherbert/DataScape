@@ -113,6 +113,11 @@ PageManager.prototype = {
     this.databaseCreationPopup.popup(this);
   },
 
+  // popupConfirmDelete: function(dbSelectionView){
+  //   this.confirmDeletePopup.dbSelectionView = dbSelectionView;
+  //   this.confirmDeletePopup.popup(this);
+  // },
+
   dirtyDiagramSaveButton: function(){
     this.diagramView.dirtySaveButton();
   },

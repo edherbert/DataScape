@@ -12,6 +12,7 @@ function DatabaseSelectionView(pageManager){
 
   document.getElementById("newDbbutton").onclick = this.createDatabase.bind(this);
 
+  //document.getElementById("deleteDbButton").onclick = this.confirmDelete.bind(this);
 
   this.updateList();
 }
@@ -23,6 +24,10 @@ DatabaseSelectionView.prototype = Object.assign(Object.create(View.prototype), {
     //let title = prompt("What should the database be called?")
     this.pageManager.popupDatabaseCreation(this);
   },
+
+  // confirmDelete: function(){
+  //   this.pageManager.popupConfirmDelete(this);
+  // },
 
   addToList: function(dbTitle){
     /*var div = document.createElement('div');
