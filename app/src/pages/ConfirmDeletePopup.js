@@ -3,6 +3,7 @@ const Popup = require('./Popup');
 const storageManager = require('../StorageManager');
 
 function ConfirmDeletePopup(dbId, dbContainer){
+  console.log(this)
   this.setup(dbId, dbContainer);
 }
 
@@ -17,7 +18,7 @@ ConfirmDeletePopup.prototype = Object.assign(Object.create(Popup.prototype), {
     Popup.prototype.setup.call(this);
 
     let confirmMessage = document.createElement('div');
-    confirmMessage.innerHTML = "Are you sure you want to delete the " + dbID + "database?";
+    confirmMessage.innerHTML = "Are you sure you want to delete the " + dbId + " database?";
 
     let confirmButton = document.createElement('div');
     confirmButton.id = "acceptDbButton";
@@ -30,7 +31,7 @@ ConfirmDeletePopup.prototype = Object.assign(Object.create(Popup.prototype), {
 
     let that = this;
     confirmButton.onclick = function(e){
-      if(confirm("Do you really want to delete this database?")){
+      if(true || confirm("Do you really want to delete this database?")){
         storageManager.removeDatabase(dbId);
         //Remove the child from the list
         that.dbContainer.parentElement.removeChild(that.dbContainer);
@@ -43,9 +44,11 @@ ConfirmDeletePopup.prototype = Object.assign(Object.create(Popup.prototype), {
     }
 
     this.backgroundView.append(confirmMessage);
-    this.backgroundView.append(deleteDatabaseButton);
+    //this.backgroundView.append(deleteDatabaseButton);
     this.backgroundView.append(confirmButton);
     this.backgroundView.append(cancelButton);
+
+    this.popup();
   },
 
   backgroundPressed: function(){
