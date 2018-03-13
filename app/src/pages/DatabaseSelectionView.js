@@ -1,5 +1,4 @@
 const View = require('./View');
-const DatabaseEditPopup = require('./DatabaseEditPopup');
 const storageManager = require('../StorageManager');
 const DatabaseCreationPopup = require('./DatabaseCreationPopup');
 
@@ -12,6 +11,8 @@ function DatabaseSelectionView(pageManager){
 
   document.getElementById("newDbbutton").onclick = this.createDatabase.bind(this);
 
+  //document.getElementById("deleteDbButton").onclick = this.confirmDelete.bind(this);
+
   this.updateList();
 }
 
@@ -23,6 +24,9 @@ DatabaseSelectionView.prototype = Object.assign(Object.create(View.prototype), {
     this.pageManager.popupDatabaseCreation(this);
   },
 
+  // confirmDelete: function(){
+  //   this.pageManager.popupConfirmDelete(this);
+  // },
 
   addToList: function(dbTitle){
     /*var div = document.createElement('div');
@@ -37,11 +41,13 @@ DatabaseSelectionView.prototype = Object.assign(Object.create(View.prototype), {
     editDb.className = "DbEditButton";
     editDb.src = "test.png";
 
+    let that = this;
     editDb.onclick = function(e){
       let dbContainer = e.target.parentElement.childNodes[0];
 
-      let databaseEdit = new DatabaseEditPopup(dbContainer.innerHTML, dbContainer);
-      databaseEdit.popup();
+      //let databaseEdit = new DatabaseEditPopup(dbContainer.innerHTML, dbContainer);
+      //databaseEdit.popup();
+      that.pageManager.popupDatabaseEdit(dbContainer.innerHTML, dbContainer);
     }
 
 

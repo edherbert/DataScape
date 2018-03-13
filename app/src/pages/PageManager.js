@@ -7,7 +7,8 @@ const structureManager = require('../StructureManager');
 const storageManager = require('../StorageManager');
 const DatabaseCreationPopup = require('./DatabaseCreationPopup');
 const TypeSelectionPopup = require('./TypeSelectionPopup');
-//const ConfirmDeletePopup = require('./ConfirmDeletePopup');
+const DatabaseEditPopup = require('./DatabaseEditPopup');
+const ConfirmDeletePopup = require('./ConfirmDeletePopup');
 
 function PageManager(){
   this.testView = new TestView();
@@ -16,7 +17,8 @@ function PageManager(){
   this.tableEditorView = new TableEditorView(this);
   this.databaseCreationPopup = new DatabaseCreationPopup(this);
   this.typeSelectionPopup = new TypeSelectionPopup(this);
-  //this.confirmDeletePopup = new ConfirmDeletePopup();
+  this.databaseEditPopup = new DatabaseEditPopup(this);
+  this.confirmDeletePopup = new ConfirmDeletePopup(this);
 }
 
 PageManager.prototype = {
@@ -110,14 +112,18 @@ PageManager.prototype = {
     return true;
   },
 
+  popupDatabaseEdit: function(dbId, dbContainer){
+    this.databaseEditPopup.popup(dbId, dbContainer);
+  },
+
   popupDatabaseCreation: function(dbSelectionView){
     this.databaseCreationPopup.dbSelectionView = dbSelectionView;
     this.databaseCreationPopup.popup(this);
   },
 
-  // popupConfirmDelete: function(dbId, dbContainer){
-  //   this.confirmDeletePopup.popup(dbId, dbContainer);
-  // },
+   popupConfirmDelete: function(dbId, dbContainer){
+     this.confirmDeletePopup.popup(dbId, dbContainer);
+   },
 
 
   dirtyDiagramSaveButton: function(){
