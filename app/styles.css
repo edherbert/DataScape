@@ -96,7 +96,7 @@ tr:nth-child(odd) {
 
   padding: 1em;
 
-  width: 50%;
+  width: 25%;
   margin: auto;
   margin-top: 1em;
 }
@@ -136,7 +136,8 @@ tr:nth-child(odd) {
   border-radius: 0.2em;
   display: inline-block;
   cursor: pointer;
-
+  width: 10%;
+  text-align: center;
   background-color: #bcbcbc;
 }
 

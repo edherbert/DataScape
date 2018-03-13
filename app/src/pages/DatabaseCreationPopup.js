@@ -51,17 +51,12 @@ DatabaseCreationPopup.prototype = Object.assign(Object.create(Popup.prototype), 
     this.backgroundView.append(this.databaseTitleInput);
     this.backgroundView.append(acceptDbButton);
     this.backgroundView.append(declineDbButton);
-  }
-});
+  },
 
-//   backgroundPressed: function(){
-//     this.popout();
-//
-//     //If the storage manager can correctly update the database then rename it in the graphcs.
-//     if(storageManager.renameDatabase(this.dbId, this.databaseTitleInput.value)){
-//       this.dbContainer.innerHTML = this.databaseTitleInput.value;
-//     }
-//   }
-// });
+  backgroundPressed: function(){
+    this.popout();
+  }
+
+});
 
 module.exports = DatabaseCreationPopup;

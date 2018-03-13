@@ -36,7 +36,6 @@ Popup.prototype = {
   },
 
   backgroundPressed: function(){
-
   }
 };
 
