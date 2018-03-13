@@ -3,8 +3,8 @@ const storageManager = require('../StorageManager');
 const ConfirmDeletePopup = require('./ConfirmDeletePopup');
 //const pageManager = require('./PageManager');
 
-function DatabaseEditPopup(dbId, dbContainer){
-  this.setup(dbId, dbContainer);
+function DatabaseEditPopup(pageManager){
+  this.setup(pageManager);
 }
 
 DatabaseEditPopup.prototype = Object.assign(Object.create(Popup.prototype), {
@@ -12,16 +12,14 @@ DatabaseEditPopup.prototype = Object.assign(Object.create(Popup.prototype), {
 
   speed: 0.4,
 
-  setup: function(dbId, dbContainer){
-    this.dbId = dbId;
-    this.dbContainer = dbContainer;
+  setup: function(pageManager){
     Popup.prototype.setup.call(this);
 
     let databaseTitle = document.createElement('div');
     databaseTitle.innerHTML = "Database Title:";
 
     this.databaseTitleInput = document.createElement('input');
-    this.databaseTitleInput.value = dbId;
+    this.databaseTitleInput.value = "";
 
     let deleteDatabaseButton = document.createElement('div');
     deleteDatabaseButton.id = "deleteDbButton";
@@ -38,13 +36,23 @@ DatabaseEditPopup.prototype = Object.assign(Object.create(Popup.prototype), {
       // }
       console.log(that)
       that.popout();
-      //pageManager.popupConfirmDelete(dbId, dbContainer);
+
+      pageManager.popupConfirmDelete(that.dbId, that.dbContainer);
     }
 
     this.backgroundView.append(databaseTitle);
     this.backgroundView.append(this.databaseTitleInput);
     this.backgroundView.append(document.createElement('hr'));
     this.backgroundView.append(deleteDatabaseButton);
+  },
+
+  popup: function(dbId, dbContainer){
+    Popup.prototype.popup.call(this);
+
+    this.databaseTitleInput.value = dbId;
+
+    this.dbId = dbId;
+    this.dbContainer = dbContainer;
   },
 
   backgroundPressed: function(){
