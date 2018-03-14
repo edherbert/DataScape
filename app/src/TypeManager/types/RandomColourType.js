@@ -6,16 +6,17 @@ function RandomColourType(){
 
 RandomColourType.prototype = Object.assign(Object.create(FieldType.prototype), {
   constructor: RandomColourType,
-  
+
   generate: function(previous){
-	  //console.log("Generating random colour"); this can be a test to see if it appears in the console on inspect page
-	  
-	  //previous.Colour <----- Has to be the same as the string
-	  previous.Colour = this.colour[Math.floor(Math.random() * this.colour.length)];//math.floor rounds number to whole number (e.g 5.6 = 5, it will go below)
-	  
-	  return previous;
+    let current = previous;
+    if(typeof previous == 'undefined') current = {};
+
+    let target = "";
+    target = this.colour[Math.floor(Math.random() * this.colour.length)];
+
+    current.Colour = target;
+    return current;
   }
-  
 });
 
 module.exports = RandomColourType;
