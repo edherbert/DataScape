@@ -11,7 +11,7 @@ LanguageType.prototype = Object.assign(Object.create(FieldType.prototype), {
     let current = previous;
     if(typeof previous == 'undefined') current = {};
 
-    let target = this.languages[Math.floor(Math.random() * this.languages.length)]
+    let target = this.languages[Math.floor(Math.random() * this.languages.length)];
     current.Language = target;
 
     return current;

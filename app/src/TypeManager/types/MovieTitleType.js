@@ -2,9 +2,9 @@ const FieldType = require("../FieldType");
 
 function MovieTitleType(){
   this.movieTitles = [
-  'Harry Potter and the Deadly Hollow Part 2', 
-  'Black Panther', 
-  'Final Destination 1', 
+  'Harry Potter and the Deadly Hollow Part 2',
+  'Black Panther',
+  'Final Destination 1',
   'Jumanji',
   'Jurasic World',
   'Pasific Rim',

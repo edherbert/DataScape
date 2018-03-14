@@ -63,8 +63,10 @@ PageManager.prototype = {
   },
 
   loadDatabase: function(title){
+    this.diagramView.ready = false;
     let db = storageManager.retrieveDatabase(title);
     if(db == null) return false;
+    console.log("Clearning");
     this.diagramView.clearDiagram();
 
 
@@ -104,9 +106,26 @@ PageManager.prototype = {
       ]
     };*/
 
+    console.log("Tables");
     for(i = 0; i < db.tables.length; i++){
       db.tables[i].tableId = this.diagramView.createTable(db.tables[i]);
     }
+
+    structureManager.setStructure(db);
+
+    console.log("Edges");
+    for(t = 0; t < db.connectors.length; t++){
+      console.log(t);
+
+      let start = db.tables[db.connectors[t].originTable].tableId;
+      let target = db.tables[db.connectors[t].destinationTable].tableId;
+      //console.log(db.connectors[t]);
+
+      //destinationTable
+      db.connectors[t].connectorId = this.diagramView.createEdge(db.connectors[t], start, target);
+    }
+
+    this.diagramView.ready = true;
     structureManager.setStructure(db);
 
     return true;

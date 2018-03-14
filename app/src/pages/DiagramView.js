@@ -19,6 +19,9 @@ function DiagramView(pageManager){
 
 constructor: DiagramView,
 DiagramView.prototype = Object.assign(Object.create(View.prototype), {
+  //Used to determine whether the diagram should react to insertions and deletions or not.
+  //If the diagram is being loaded then this would be set to false.
+  ready: false,
 
   currentDbName: "",
 
@@ -77,7 +80,7 @@ DiagramView.prototype = Object.assign(Object.create(View.prototype), {
 
     this.graph.addListener(mxEvent.DOUBLE_CLICK, function(sender, evt){
       	var cell = evt.getProperty('cell');
-        if(cell!=null){
+        if(cell!=null && !cell.edge){
           that.pageManager.popupTableEditorView(cell.getId());
         }
     });
@@ -85,7 +88,18 @@ DiagramView.prototype = Object.assign(Object.create(View.prototype), {
     //This'll probably run on loading so this'll need to be fixed for then.
     this.graph.addListener(mxEvent.CELLS_ADDED, function(sender, evt){
       console.log("Cell Added");
-      //tables are added to the strucutre manager somewhere else in the project, so I don't need to do it here.
+
+      if(evt.properties.cells[0].edge && that.ready){
+        let edge = evt.properties.cells[0];
+        //The added cell is an edge, so add it to the structure manager.
+
+        //console.log(edge);
+        //console.log(edge.source);
+        //console.log(edge.destination);
+        structureManager.addEdge(edge.source.id, edge.target.id);
+        console.log(edge);
+      }
+
       that.dirtySaveButton();
     });
 
@@ -104,7 +118,6 @@ DiagramView.prototype = Object.assign(Object.create(View.prototype), {
       console.log("Cell Resized");
       that.dirtySaveButton();
 
-      console.log(evt);
       for(t = 0; t < evt.properties.cells.length; t++){
         if(evt.properties.cells[t].edge) continue; //For now
 
@@ -116,8 +129,10 @@ DiagramView.prototype = Object.assign(Object.create(View.prototype), {
       console.log("Cell deleted");
       that.dirtySaveButton();
 
-      for(t = 0; t < evt.properties.cells.length; t++){
-        structureManager.removeTable(evt.properties.cells[t].id);
+      if(this.ready){
+        for(t = 0; t < evt.properties.cells.length; t++){
+          structureManager.removeTable(evt.properties.cells[t].id);
+        }
       }
     });
   },
@@ -126,15 +141,26 @@ DiagramView.prototype = Object.assign(Object.create(View.prototype), {
     let tableData = {title: "New table", requiredAmmount: 10, x: 100, y: 100, width: 200, height: 200, types: []};
     tableData.tableId = this.createTable(tableData);
 
-    structureManager.pushTable(tableData);
+    if(this.ready){
+      structureManager.pushTable(tableData);
+    }
   },
 
   createTable: function(e){
     this.graph.getModel().beginUpdate();
-    var table = this.graph.insertVertex(this.graph.getDefaultParent(), null, this.generateTableHTML(e), e.x, e.y, e.width, e.height, 'TABLE_STYLE');
+    let table = this.graph.insertVertex(this.graph.getDefaultParent(), null, this.generateTableHTML(e), e.x, e.y, e.width, e.height, 'TABLE_STYLE');
     this.graph.getModel().endUpdate();
 
     return table.getId();
+  },
+
+  createEdge: function(e, source, target){
+    this.graph.getModel().beginUpdate();
+    //var table = this.graph.insertVertex(this.graph.getDefaultParent(), null, this.generateTableHTML(e), e.x, e.y, e.width, e.height, 'TABLE_STYLE');
+    let edge = this.graph.insertEdge(this.graph.getDefaultParent(), null, '', this.graph.getModel().getCell(source), this.graph.getModel().getCell(target), 'EDGE_STYLE');
+    this.graph.getModel().endUpdate();
+
+    return edge.getId();
   },
 
   returnToSelection: function(){
@@ -201,7 +227,7 @@ DiagramView.prototype = Object.assign(Object.create(View.prototype), {
   },
 
   clearDiagram: function(){
-    this.graph.removeCells(this.graph.getChildVertices(this.graph.getDefaultParent()))
+    this.graph.removeCells(this.graph.getChildVertices(this.graph.getDefaultParent()));
   }
 });
 

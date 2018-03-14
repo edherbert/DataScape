@@ -56,6 +56,14 @@ StructureManager.prototype = {
   removeTable: function(id){
     let tableIndex = this.getTableIndexById(id);
     this.structure.tables.splice(tableIndex, 1);
+  },
+
+  addEdge: function(source, target){
+    let newEdge = {originTable: 0, destinationTable: 0, type: "One to many"};
+    newEdge.originTable = this.getTableIndexById(source);
+    newEdge.destinationTable = this.getTableIndexById(target);
+
+    this.structure.connectors.push(newEdge);
   }
 };
 
