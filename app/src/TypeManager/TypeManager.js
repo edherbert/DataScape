@@ -13,10 +13,11 @@ const CityType = require('./types/CityType');
 const BornCountry = require('./types/BornCountry');
 const ReligionType = require('./types/ReligionType');
 const CountyType = require('./types/CountyType');
-//
+const CurrencyType = require('./types/CurrencyType');
 const ShirtSizeType = require('./types/ShirtSizeType');
 const MovieTitleType = require('./types/MovieTitleType');
-
+const JobType = require('./types/JobType');
+const LanguageType = require('./types/LanguageType');
 
 function TypeManager(){
   this.testType = new TestType();
@@ -34,16 +35,17 @@ function TypeManager(){
   this.bornCountryType = new BornCountry();
   this.religionType = new ReligionType();
   this.countyType = new CountyType();
-  //
+  this.jobType = new JobType();
+  this.currencyType = new CurrencyType();	
   this.shirtSizeType = new ShirtSizeType();
   this.movieTitleType = new MovieTitleType();
+  this.languageType = new LanguageType();
+	
 
 
   this.typeNames = ["First Name", "Second Name", "Gender", "Postcode", "Random Colour", "Boolean", "Email", 
-  "Phone Number", "Title", "Age", "City", "Born Country", "Religion", "County", 
-  //
-  "Shirt Size",
-  "Movie",
+  "Phone Number", "Title", "Age", "City", "Born Country", "Religion", "County",  "Shirt Size", "Movie", "Currency", 
+  "Job", "Language"
   ];
 }
 
@@ -95,14 +97,21 @@ TypeManager.prototype = {
         case "County":
           return this.countyType;
           break;
-        //  
         case "Shirt Size":
           return this.shirtSizeType;
           break;
-        case "Movie":
+        case "Movie Title":
           return this.movieTitleType;
           break; 
-           
+	case "Currency":
+          return this.currencyType;
+          break;
+	case "Job":
+          return this.jobType;
+          break;	      
+	case "Language":
+          return this.languageType;
+          break;
         default:
           console.log("No type was found for " + fieldTypeName);
           break;
