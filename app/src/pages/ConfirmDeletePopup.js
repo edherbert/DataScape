@@ -12,24 +12,26 @@ ConfirmDeletePopup.prototype = Object.assign(Object.create(Popup.prototype), {
 
   speed: 0.4,
 
-  setup: function(){
+  setup: function(dbId, dbContainer){
+    console.log(dbId);
     Popup.prototype.setup.call(this);
 
 
-    let confirmMessage = document.createElement('div');
-    confirmMessage.innerHTML = "Are you sure you want to delete the " + dbId + " database?";
+    this.dbContainer = dbContainer
+    this.confirmMessage = document.createElement('div');
+    this.confirmMessage.innerHTML = "Are you sure you want to delete the " + dbId + " database?";
 
-    let confirmButton = document.createElement('div');
-    confirmButton.id = "acceptDbButton";
-    confirmButton.innerHTML = "Yes";
+    this.confirmButton = document.createElement('div');
+    this.confirmButton.id = "acceptDbButton";
+    this.confirmButton.innerHTML = "Yes";
 
-    let cancelButton = document.createElement('div');
-    cancelButton.id = "declineDbButton";
-    cancelButton.innerHTML = "No";
+    this.cancelButton = document.createElement('div');
+    this.cancelButton.id = "declineDbButton";
+    this.cancelButton.innerHTML = "No";
 
 
     let that = this;
-    confirmButton.onclick = function(e){
+    this.confirmButton.onclick = function(e){
 
       if(true || confirm("Do you really want to delete this database?")){
         storageManager.removeDatabase(dbId);
@@ -38,22 +40,22 @@ ConfirmDeletePopup.prototype = Object.assign(Object.create(Popup.prototype), {
         that.popout();
       }
 
-      storageManager.removeDatabase(that.dbId);
+      /*storageManager.removeDatabase(that.dbId);
       //Remove the child from the list
       that.dbContainer.parentElement.removeChild(that.dbContainer);
+      that.popout();*/
+    }
+
+    this.cancelButton.onclick = function(e){
       that.popout();
     }
 
-    cancelButton.onclick = function(e){
-      that.popout();
-    }
-
-    this.backgroundView.append(confirmMessage);
+    this.backgroundView.append(this.confirmMessage);
     //this.backgroundView.append(deleteDatabaseButton);
-    this.backgroundView.append(confirmButton);
-    this.backgroundView.append(cancelButton);
+    this.backgroundView.append(this.confirmButton);
+    this.backgroundView.append(this.cancelButton);
 
-    this.popup();
+    //this.popup();
   },
 
   popup: function(dbId, dbContainer){
