@@ -1,6 +1,6 @@
 const View = require('./View');
 const databaseEditPopup = require('./DatabaseEditPopup');
-const storageManager = require('../StorageManager')
+const storageManager = require('../StorageManager');
 const Popup = require('./Popup');
 
 function DatabaseCreationPopup(pageManager){

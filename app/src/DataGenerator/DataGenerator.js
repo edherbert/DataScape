@@ -2,11 +2,15 @@ const TableParser = require('./TableParser');
 const FieldGenerator = require('./FieldGenerator');
 const TableLinker = require('./TableLinker');
 const structureManager = require('../StructureManager');
+const GeneratedDataPopup = require('../pages/GeneratedDataPopup');
+const PageManager = require('../pages/PageManager');
 
 function DataGenerator(){
   this.tableParser = new TableParser();
   this.fieldGenerator = new FieldGenerator();
   this.tableLinker = new TableLinker();
+  this.generatedDataPopup = new GeneratedDataPopup();
+  //this.pageManager = new PageManager();
 
   //This will be removed in the final version.
   //It's just to show what the input could look like.
@@ -96,9 +100,12 @@ DataGenerator.prototype = {
 
     let linkedTables = this.tableLinker.linkTables(generatedData);
 
+    let data = [];
     for(t = 0; t < linkedTables.tables.length; t++){
       for(i = 0; i < linkedTables.tables[t].done.length; i++){
-        console.log(linkedTables.tables[t].done[i]);
+        //console.log(linkedTables.tables[t].done[i]);
+        //pageManager.popupGeneratedData.popup(linkedTables.tables[t].done[i]);
+        data.push(linkedTables.tables[t].done[i]);
       }
     }
   }

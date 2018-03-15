@@ -10,6 +10,7 @@ const TypeSelectionPopup = require('./TypeSelectionPopup');
 const DatabaseEditPopup = require('./DatabaseEditPopup');
 const ConfirmDeletePopup = require('./ConfirmDeletePopup');
 const ForeignKeySelectionPopup = require('./ForeignKeySelectionPopup');
+const GeneratedDataPopup = require('./GeneratedDataPopup');
 
 function PageManager(){
   this.testView = new TestView();
@@ -21,6 +22,7 @@ function PageManager(){
   this.databaseEditPopup = new DatabaseEditPopup(this);
   this.confirmDeletePopup = new ConfirmDeletePopup(this);
   this.foreignKeySelectionPopup = new ForeignKeySelectionPopup(this);
+  this.generatedDataPopup = new GeneratedDataPopup(this);
 }
 
 PageManager.prototype = {
@@ -80,7 +82,7 @@ PageManager.prototype = {
     for(t = 0; t < db.connectors.length; t++){
       let start = db.tables[db.connectors[t].originTable].tableId;
       let target = db.tables[db.connectors[t].destinationTable].tableId;
-      
+
       db.connectors[t].connectorId = this.diagramView.createEdge(db.connectors[t], start, target);
     }
 
@@ -101,6 +103,10 @@ PageManager.prototype = {
 
   popupConfirmDelete: function(dbId, dbContainer){
    this.confirmDeletePopup.popup(dbId, dbContainer);
+  },
+
+  popupGeneratedData: function(generatedData){
+    this.generatedDataPopup.popup(generatedData);
   },
 
   popupForeignKeySelection: function(tableId, editPopup){
