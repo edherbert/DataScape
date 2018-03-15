@@ -168,7 +168,7 @@ DiagramView.prototype = Object.assign(Object.create(View.prototype), {
   },
 
   generateDataButtonPressed: function(){
-      dataGenerator.generateData();
+      this.pageManager.createDataGenerator();
   },
 
   generateTableHTML: function(table){

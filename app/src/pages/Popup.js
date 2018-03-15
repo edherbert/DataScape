@@ -36,6 +36,10 @@ Popup.prototype = {
   },
 
   backgroundPressed: function(){
+  },
+
+  generateData: function(){
+    
   }
 };
 

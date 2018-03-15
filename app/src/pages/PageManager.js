@@ -11,6 +11,7 @@ const DatabaseEditPopup = require('./DatabaseEditPopup');
 const ConfirmDeletePopup = require('./ConfirmDeletePopup');
 const ForeignKeySelectionPopup = require('./ForeignKeySelectionPopup');
 const GeneratedDataPopup = require('./GeneratedDataPopup');
+const DataGenerator = require('../DataGenerator/DataGenerator');
 
 function PageManager(){
   this.testView = new TestView();
@@ -23,6 +24,7 @@ function PageManager(){
   this.confirmDeletePopup = new ConfirmDeletePopup(this);
   this.foreignKeySelectionPopup = new ForeignKeySelectionPopup(this);
   this.generatedDataPopup = new GeneratedDataPopup(this);
+  this.dataGenerator = new DataGenerator(this);
 }
 
 PageManager.prototype = {
@@ -103,6 +105,10 @@ PageManager.prototype = {
 
   popupConfirmDelete: function(dbId, dbContainer){
    this.confirmDeletePopup.popup(dbId, dbContainer);
+  },
+
+  createDataGenerator: function(){
+    this.dataGenerator.generateData(this);
   },
 
   popupGeneratedData: function(generatedData){

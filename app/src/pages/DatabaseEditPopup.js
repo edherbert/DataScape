@@ -27,7 +27,7 @@ DatabaseEditPopup.prototype = Object.assign(Object.create(Popup.prototype), {
 
     let that = this;
     deleteDatabaseButton.onclick = function(e){
-      let deletePopup = new ConfirmDeletePopup(that.dbId, that.dbContainer)
+      //let deletePopup = new ConfirmDeletePopup(that.dbId, that.dbContainer)
       // if(confirm("Do you really want to delete this database?")){
       //   storageManager.removeDatabase(dbId);
       //   //Remove the child from the list
