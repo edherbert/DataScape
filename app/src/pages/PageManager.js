@@ -9,6 +9,7 @@ const DatabaseCreationPopup = require('./DatabaseCreationPopup');
 const TypeSelectionPopup = require('./TypeSelectionPopup');
 const DatabaseEditPopup = require('./DatabaseEditPopup');
 const ConfirmDeletePopup = require('./ConfirmDeletePopup');
+const ForeignKeySelectionPopup = require('./ForeignKeySelectionPopup');
 
 function PageManager(){
   this.testView = new TestView();
@@ -19,6 +20,7 @@ function PageManager(){
   this.typeSelectionPopup = new TypeSelectionPopup(this);
   this.databaseEditPopup = new DatabaseEditPopup(this);
   this.confirmDeletePopup = new ConfirmDeletePopup(this);
+  this.foreignKeySelectionPopup = new ForeignKeySelectionPopup(this);
 }
 
 PageManager.prototype = {
@@ -140,9 +142,13 @@ PageManager.prototype = {
     this.databaseCreationPopup.popup(this);
   },
 
-   popupConfirmDelete: function(dbId, dbContainer){
-     this.confirmDeletePopup.popup(dbId, dbContainer);
-   },
+  popupConfirmDelete: function(dbId, dbContainer){
+   this.confirmDeletePopup.popup(dbId, dbContainer);
+  },
+
+  popupForeignKeySelection: function(tableId){
+    this.foreignKeySelectionPopup.popup(tableId);
+  },
 
 
   dirtyDiagramSaveButton: function(){

@@ -26,6 +26,7 @@ function TableEditorView(pageManager){
 
   this.container.onclick = this.backgroundPressed.bind(this);
   document.getElementById("newRowButton").onclick = this.newRowButtonPressed.bind(this);
+  document.getElementById("addForeignKeyButton").onclick = this.ForeignKeyButtonPressed.bind(this);
 }
 
 TableEditorView.prototype = Object.assign(Object.create(View.prototype), {
@@ -153,6 +154,11 @@ TableEditorView.prototype = Object.assign(Object.create(View.prototype), {
 
   newRowButtonPressed: function(){
     this.newRow("", "Field Type");
+    this.changeMade();
+  },
+
+  ForeignKeyButtonPressed: function(){
+    this.pageManager.popupForeignKeySelection(this.currentId);
     this.changeMade();
   },
 

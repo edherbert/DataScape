@@ -141,7 +141,7 @@ tr:nth-child(odd) {
   background-color: #bcbcbc;
 }
 
-.DBEntry:hover{
+.DBEntry:hover, .tableEntry:hover{
   background-color: #ABABAB;
 }
 
@@ -235,4 +235,18 @@ tr:nth-child(odd) {
 
 #TypeListItem:hover{
   background-color: #ABABAB;
+}
+
+.tableEntry{
+  font-family: Arial;
+  padding: 0.3em;
+  border-radius: 0.2em;
+  cursor: pointer;
+  text-align: center;
+  background-color: #bcbcbc;
+
+  width: 80%;
+  margin: auto;
+
+  margin-top: 1em;
 }
