@@ -20,6 +20,7 @@ DatabaseCreationPopup.prototype = Object.assign(Object.create(Popup.prototype), 
     databaseTitle.innerHTML = "What should the database be called?";
 
     this.databaseTitleInput = document.createElement('input');
+    this.databaseTitleInput.id = "dbInput";
 
     let acceptDbButton = document.createElement('div');
     acceptDbButton.id = "acceptDbButton";
