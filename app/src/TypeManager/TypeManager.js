@@ -36,15 +36,15 @@ function TypeManager(){
   this.religionType = new ReligionType();
   this.countyType = new CountyType();
   this.jobType = new JobType();
-  this.currencyType = new CurrencyType();	
+  this.currencyType = new CurrencyType();
   this.shirtSizeType = new ShirtSizeType();
   this.movieTitleType = new MovieTitleType();
   this.languageType = new LanguageType();
-	
 
 
-  this.typeNames = ["First Name", "Second Name", "Gender", "Postcode", "Random Colour", "Boolean", "Email", 
-  "Phone Number", "Title", "Age", "City", "Born Country", "Religion", "County",  "Shirt Size", "Movie", "Currency", 
+
+  this.typeNames = ["First Name", "Second Name", "Gender", "Postcode", "Random Colour", "Boolean", "Email",
+  "Phone Number", "Title", "Age", "City", "Born Country", "Religion", "County",  "Shirt Size", "Movie Title", "Currency",
   "Job", "Language"
   ];
 }
@@ -102,13 +102,13 @@ TypeManager.prototype = {
           break;
         case "Movie Title":
           return this.movieTitleType;
-          break; 
+          break;
 	case "Currency":
           return this.currencyType;
           break;
 	case "Job":
           return this.jobType;
-          break;	      
+          break;
 	case "Language":
           return this.languageType;
           break;

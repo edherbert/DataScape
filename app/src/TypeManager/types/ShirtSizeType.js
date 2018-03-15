@@ -12,7 +12,7 @@ ShirtSizeType.prototype = Object.assign(Object.create(FieldType.prototype), {
     if(typeof previous == 'undefined') current = {};
 
     let target = this.shirtSizes[Math.floor(Math.random() * this.shirtSizes.length)]
-    current.ShirtSize = target;
+    current['Shirt Size'] = target;
 
     return current;
   }

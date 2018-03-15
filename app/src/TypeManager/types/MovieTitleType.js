@@ -21,7 +21,7 @@ MovieTitleType.prototype = Object.assign(Object.create(FieldType.prototype), {
     if(typeof previous == 'undefined') current = {};
 
     let title = this.movieTitles[Math.floor(Math.random() * this.movieTitles.length)];
-    current.MovieTitle = title;
+    current['Movie Title'] = title;
 
     return current;
   }

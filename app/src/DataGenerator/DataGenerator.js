@@ -1,6 +1,7 @@
 const TableParser = require('./TableParser');
 const FieldGenerator = require('./FieldGenerator');
 const TableLinker = require('./TableLinker');
+const structureManager = require('../StructureManager');
 
 function DataGenerator(){
   this.tableParser = new TableParser();
@@ -86,7 +87,10 @@ DataGenerator.prototype = {
   constructor: DataGenerator,
 
   generateData: function(){
-    let parsedTables = this.tableParser.parseStructure(this.testJson);
+    let currentStructure = structureManager.getStructure();
+
+    let parsedTables = this.tableParser.parseStructure(currentStructure);
+
     //console.log(parsedTables);
     let generatedData = this.fieldGenerator.generateData(parsedTables);
 

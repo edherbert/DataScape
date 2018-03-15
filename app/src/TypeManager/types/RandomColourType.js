@@ -14,7 +14,7 @@ RandomColourType.prototype = Object.assign(Object.create(FieldType.prototype), {
     let target = "";
     target = this.colour[Math.floor(Math.random() * this.colour.length)];
 
-    current.Colour = target;
+    current['Random Colour'] = target;
     return current;
   }
 });

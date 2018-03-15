@@ -12,7 +12,7 @@ PhoneNumberType.prototype = Object.assign(Object.create(FieldType.prototype), {
 
     let target = "";
     target = String(Math.floor(Math.random() * 1000000000) + 9999999999)
-    current.PhoneNumber = "+44" + target;
+    current['Phone Number'] = "+44" + target;
 
     return current;
   }
