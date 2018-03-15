@@ -49,7 +49,9 @@ TableEditorView.prototype = Object.assign(Object.create(View.prototype), {
   setupRows: function(fieldTypes){
     this.clearRows();
     for(r = 0; r < fieldTypes.length; r++){
-      this.newRow(fieldTypes[r].fieldName, fieldTypes[r].fieldType);
+      let foreignKey = false;
+      if(fieldTypes[r].fieldType == "Foreign Key") foreignKey = true;
+      this.newRow(fieldTypes[r].fieldName, fieldTypes[r].fieldType, foreignKey);
     }
   },
 
@@ -69,7 +71,7 @@ TableEditorView.prototype = Object.assign(Object.create(View.prototype), {
     this.table.append(heading);
   },
 
-  newRow: function(name, fieldType){
+  newRow: function(name, fieldType, foreignKey){
     var row = document.createElement('tr');
     var first = document.createElement('td');
     var second = document.createElement('td');
@@ -90,8 +92,13 @@ TableEditorView.prototype = Object.assign(Object.create(View.prototype), {
     second.append(typeButton);
 
     let that = this;
-    typeButton.onclick = function(e){
-      that.pageManager.popupTypeSelection(e.target);
+    if(!foreignKey){
+      typeButton.onclick = function(e){
+        that.pageManager.popupTypeSelection(e.target);
+      }
+    }else{
+      typeButton.style['background-color'] = "#82D47F";
+      typeButton.style['cursor'] = "default";
     }
 
     image.onclick = function(e){
@@ -153,12 +160,12 @@ TableEditorView.prototype = Object.assign(Object.create(View.prototype), {
   },
 
   newRowButtonPressed: function(){
-    this.newRow("", "Field Type");
+    this.newRow("", "Field Type", false);
     this.changeMade();
   },
 
   ForeignKeyButtonPressed: function(){
-    this.pageManager.popupForeignKeySelection(this.currentId);
+    this.pageManager.popupForeignKeySelection(this.currentId, this);
     this.changeMade();
   },
 

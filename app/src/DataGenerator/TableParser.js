@@ -17,7 +17,7 @@ TableParser.prototype = {
 
       //console.log(requirements);
       for(i = 0; i < requirements.length; i++){
-        if(requirements[i] == "ForeignKey"){
+        if(requirements[i] == "Foreign Key"){
           //The entry is a foreign key, so don't try to trace it's requirements.
         }else{
           if(!this.checkIfListed(requirements[i])){

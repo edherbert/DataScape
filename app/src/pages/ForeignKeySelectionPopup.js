@@ -21,7 +21,7 @@ ForeignKeySelectionPopup.prototype = Object.assign(Object.create(Popup.prototype
     this.backgroundView.append(title);
   },
 
-  popup: function(tableId){
+  popup: function(tableId, editPopup){
     //Remove all the elements that are already in the popup based on the list.
     for(t = 0; t < this.listObjects.length; t++){
       this.listObjects[t].parentNode.removeChild(this.listObjects[t]);
@@ -45,6 +45,8 @@ ForeignKeySelectionPopup.prototype = Object.assign(Object.create(Popup.prototype
       let that = this;
       elem.onclick = function(){
         that.popout();
+
+        editPopup.newRow("", "Foreign Key", true);
       };
 
       this.backgroundView.append(elem);

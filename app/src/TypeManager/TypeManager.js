@@ -103,13 +103,13 @@ TypeManager.prototype = {
         case "Movie Title":
           return this.movieTitleType;
           break;
-	case "Currency":
+      	case "Currency":
           return this.currencyType;
           break;
-	case "Job":
+      	case "Job":
           return this.jobType;
           break;
-	case "Language":
+      	case "Language":
           return this.languageType;
           break;
         default:
