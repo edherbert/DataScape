@@ -19,13 +19,10 @@ GeneratedDataPopup.prototype = Object.assign(Object.create(Popup.prototype), {
     generatedDataTitle.innerHTML = "Generated Data:";
     generatedDataTitle.id = "generatedDataTitle";
 
-    let dataToDisplay = "";
     let dataDisplay = document.createElement('div');
     dataDisplay.id = "dataDisplay";
-    // for ( i = 0 ; i < generatedData.length ; i++){
-    //   dataToDisplay = dataToDisplay.concat(generatedData[i]);
-    // }
-    dataDisplay.innerHTML = dataToDisplay;
+    console.log(generatedData);
+    dataDisplay.innerHTML = JSON.stringify(generatedData);
 
     let closeButton = document.createElement('div');
     closeButton.id = "declineDbButton";
@@ -41,7 +38,7 @@ GeneratedDataPopup.prototype = Object.assign(Object.create(Popup.prototype), {
 
 
     this.backgroundView.append(generatedDataTitle);
-    this.backgroundView.append(generatedData);
+    this.backgroundView.append(dataDisplay);
     this.backgroundView.append(closeButton);
   },
 

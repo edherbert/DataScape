@@ -99,12 +99,12 @@ DataGenerator.prototype = {
 
     let linkedTables = this.tableLinker.linkTables(generatedData);
 
-    let data = [];
+    let data = "";
     for(t = 0; t < linkedTables.tables.length; t++){
       for(i = 0; i < linkedTables.tables[t].done.length; i++){
         console.log(linkedTables.tables[t].done[i]);
         //pageManager.popupGeneratedData.popup(linkedTables.tables[t].done[i]);
-        data.push(linkedTables.tables[t].done[i]);
+        data.concat(linkedTables.tables[t].done[i]);
       }
     }
     pageManager.popupGeneratedData(data);
