@@ -53,7 +53,12 @@ DatabaseEditPopup.prototype = Object.assign(Object.create(Popup.prototype), {
 
     //If the storage manager can correctly update the database then rename it in the graphcs.
     if(storageManager.renameDatabase(this.dbId, this.databaseTitleInput.value)){
-      this.dbContainer.innerHTML = this.databaseTitleInput.value;
+      if(this.databaseTitleInput.value.match("^[a-zA-Z1-9_]+$")){
+        this.dbContainer.innerHTML = this.databaseTitleInput.value;
+      }
+      else{
+        alert("Enter valid characters only please. Characters must be between a-z and A-Z.");
+      }
     }
   }
 });
