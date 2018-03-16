@@ -128,10 +128,12 @@ DiagramView.prototype = Object.assign(Object.create(View.prototype), {
       console.log("Cell deleted");
       that.dirtySaveButton();
 
-      if(this.ready){
+      if(that.ready){
         //Remove the cells from the structure manager.
         //They don't need to be removed from the diagram as they'll already be removed at this point.
         for(t = 0; t < evt.properties.cells.length; t++){
+          if(evt.properties.cells[t].edge) continue;
+
           structureManager.removeTable(evt.properties.cells[t].id);
         }
       }
