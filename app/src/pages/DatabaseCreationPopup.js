@@ -32,11 +32,12 @@ DatabaseCreationPopup.prototype = Object.assign(Object.create(Popup.prototype), 
 
     let that = this;
     acceptDbButton.onclick = function(e){
-      if(that.databaseTitleInput.value != ""){
+      if(that.databaseTitleInput.value.match("^[a-zA-Z]+$")){
         that.dbSelectionView.addToList(that.databaseTitleInput.value);
         storageManager.createDatabase(that.databaseTitleInput.value);
         that.popout();
       }else{
+        alert("Enter valid characters only please. No illegal characters allowed.");
         that.popout();
       }
     }
