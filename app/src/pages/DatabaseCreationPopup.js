@@ -33,7 +33,7 @@ DatabaseCreationPopup.prototype = Object.assign(Object.create(Popup.prototype), 
     let that = this;
     acceptDbButton.onclick = function(e){
       //Do a regex function to check if the title is valid.
-      if(that.databaseTitleInput.value.match("^[a-zA-Z]+$")){
+      if(that.databaseTitleInput.value.match("^[a-zA-Z1-9_]+$")){
         //Add it to the list.
         that.dbSelectionView.addToList(that.databaseTitleInput.value);
         //Create the database in storage
