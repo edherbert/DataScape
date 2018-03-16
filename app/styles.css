@@ -250,3 +250,11 @@ tr:nth-child(odd) {
 
   margin-top: 1em;
 }
+
+#dataDisplay{
+  overflow: scroll;
+
+  background-color: white;
+
+  height: 25em;
+}

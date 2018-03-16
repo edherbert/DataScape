@@ -24,6 +24,7 @@ function PageManager(){
   this.confirmDeletePopup = new ConfirmDeletePopup(this);
   this.foreignKeySelectionPopup = new ForeignKeySelectionPopup(this);
   this.generatedDataPopup = new GeneratedDataPopup(this);
+
   this.dataGenerator = new DataGenerator(this);
 }
 
@@ -112,7 +113,8 @@ PageManager.prototype = {
   },
 
   popupGeneratedData: function(generatedData){
-    this.generatedDataPopup.popup(generatedData);
+    let data = this.dataGenerator.generateData();
+    this.generatedDataPopup.popup(data);
   },
 
   popupForeignKeySelection: function(tableId, editPopup){
