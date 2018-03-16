@@ -1,19 +1,19 @@
 const FieldType = require("../FieldType");
 
-function TestType(){
+function TestType() {
 
 }
 
 TestType.prototype = Object.assign(Object.create(FieldType.prototype), {
-  constructor: TestType,
+    constructor: TestType,
 
-  generate: function(previous){
-    let current = previous;
-    if(typeof previous == 'undefined') current = {};
-    current.Test = "This is a test";
+    generate: function(previous) {
+        let current = previous;
+        if (typeof previous == 'undefined') current = {};
+        current.Test = "This is a test";
 
-    return current;
-  }
+        return current;
+    }
 });
 
 module.exports = TestType;
