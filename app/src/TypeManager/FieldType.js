@@ -1,13 +1,13 @@
-function FieldType() {
+function FieldType(){
 
 }
 
 FieldType.prototype = {
-    Requirements: [],
+	Requirements: [],
 
-    generate: function(previous) {
-        return previous;
-    }
+	generate: function(previous){
+		return previous;
+}
 };
 
 module.exports = FieldType;

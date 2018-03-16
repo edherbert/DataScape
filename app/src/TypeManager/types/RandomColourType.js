@@ -1,22 +1,22 @@
 const FieldType = require("../FieldType");
 
-function RandomColourType() {
-    this.colour = ['Red', 'Yellow', 'Pink', 'Green'];
+function RandomColourType(){
+	this.colour = ['Red', 'Yellow', 'Pink', 'Green'];
 }
 
 RandomColourType.prototype = Object.assign(Object.create(FieldType.prototype), {
-    constructor: RandomColourType,
+  constructor: RandomColourType,
 
-    generate: function(previous) {
-        let current = previous;
-        if (typeof previous == 'undefined') current = {};
+  generate: function(previous){
+    let current = previous;
+    if(typeof previous == 'undefined') current = {};
 
-        let target = "";
-        target = this.colour[Math.floor(Math.random() * this.colour.length)];
+    let target = "";
+    target = this.colour[Math.floor(Math.random() * this.colour.length)];
 
-        current['Random Colour'] = target;
-        return current;
-    }
+    current['Random Colour'] = target;
+    return current;
+  }
 });
 
 module.exports = RandomColourType;

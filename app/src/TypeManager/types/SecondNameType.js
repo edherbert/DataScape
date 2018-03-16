@@ -1,21 +1,21 @@
 const FieldType = require("../FieldType");
 
-function SecondNameType() {
-    this.secondNames = ['Jones', 'Taylor', 'Williams', 'Brown', 'Smith', 'Evans', 'Thomas', 'Wood'];
+function SecondNameType(){
+  this.secondNames = ['Jones', 'Taylor', 'Williams', 'Brown', 'Smith', 'Evans', 'Thomas', 'Wood'];
 }
 
 SecondNameType.prototype = Object.assign(Object.create(FieldType.prototype), {
-    constructor: SecondNameType,
+  constructor: SecondNameType,
 
-    generate: function(previous) {
-        let current = previous;
-        if (typeof previous == 'undefined') current = {};
+  generate: function(previous){
+    let current = previous;
+    if(typeof previous == 'undefined') current = {};
 
-        let secondName = this.secondNames[Math.floor(Math.random() * this.secondNames.length)];
-        current['Second Name'] = secondName;
+    let secondName = this.secondNames[Math.floor(Math.random() * this.secondNames.length)];
+    current['Second Name'] = secondName;
 
-        return current;
-    }
+    return current;
+  }
 });
 
 module.exports = SecondNameType;

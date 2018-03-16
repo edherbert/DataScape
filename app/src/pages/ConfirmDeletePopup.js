@@ -1,74 +1,63 @@
-function StructureManager() {
-    this.structure = {};
+const View = require('./View');
+const Popup = require('./Popup');
+const storageManager = require('../StorageManager');
+
+function ConfirmDeletePopup(dbId, dbContainer){
+  this.setup(dbId, dbContainer);
 }
 
-StructureManager.prototype = {
-    constructor: StructureManager,
+ConfirmDeletePopup.prototype = Object.assign(Object.create(Popup.prototype), {
+  constructor: ConfirmDeletePopup,
 
-    getStructure: function() {
-        return this.structure
-    },
+  speed: 0.4,
 
-    setStructure: function(s) {
-        this.structure = s;
-    },
+  setup: function(dbId, dbContainer){
+    Popup.prototype.setup.call(this);
 
-    getTableIndexById: function(id) {
-        for (t = 0; t < this.structure.tables.length; t++) {
-            if (this.structure.tables[t].tableId == id) {
-                return t;
-            }
-        }
-    },
 
-    getTableById: function(id) {
-        return this.structure.tables[this.getTableIndexById(id)];
-    },
+    this.dbContainer = dbContainer
+    this.confirmMessage = document.createElement('div');
+    this.confirmMessage.innerHTML = "Are you sure you want to delete the " + dbId + " database?";
 
-    replaceTable: function(id, table) {
-        this.structure.tables[this.getTableIndexById(id)] = table;
-    },
+    this.confirmButton = document.createElement('div');
+    this.confirmButton.id = "acceptDbButton";
+    this.confirmButton.innerHTML = "Yes";
 
-    setTableTitle: function(id, title) {
-        this.structure.tables[this.getTableIndexById(id)].title = title;
-    },
+    this.cancelButton = document.createElement('div');
+    this.cancelButton.id = "declineDbButton";
+    this.cancelButton.innerHTML = "No";
 
-    setTableTypes: function(id, types) {
-        this.structure.tables[this.getTableIndexById(id)].types = types;
-    },
 
-    pushTable: function(table) {
-        this.structure.tables.push(table);
-    },
-
-    setTablePosition: function(id, x, y) {
-        let tableIndex = this.getTableIndexById(id);
-        this.structure.tables[tableIndex].x = x;
-        this.structure.tables[tableIndex].y = y;
-    },
-
-    setTableSize: function(id, width, height) {
-        let tableIndex = this.getTableIndexById(id);
-        this.structure.tables[tableIndex].width = width;
-        this.structure.tables[tableIndex].height = height;
-    },
-
-    removeTable: function(id) {
-        let tableIndex = this.getTableIndexById(id);
-        this.structure.tables.splice(tableIndex, 1);
-    },
-
-    addEdge: function(source, target) {
-        let newEdge = {
-            originTable: 0,
-            destinationTable: 0,
-            type: "One to many"
-        };
-        newEdge.originTable = this.getTableIndexById(source);
-        newEdge.destinationTable = this.getTableIndexById(target);
-
-        this.structure.connectors.push(newEdge);
+    let that = this;
+    this.confirmButton.onclick = function(e){
+      //Actually delete the database.
+      storageManager.removeDatabase(that.dbId);
+      //Remove the child from the list
+      that.dbContainer.parentElement.removeChild(that.dbContainer);
+      that.popout();
     }
-};
 
-module.exports = new StructureManager();
+    this.cancelButton.onclick = function(e){
+      that.popout();
+    }
+
+    this.backgroundView.append(this.confirmMessage);
+    this.backgroundView.append(this.confirmButton);
+    this.backgroundView.append(this.cancelButton);
+  },
+
+  popup: function(dbId, dbContainer){
+    Popup.prototype.popup.call(this);
+    this.dbId = dbId;
+    this.dbContainer = dbContainer;
+
+    this.confirmMessage.innerHTML = "Are you sure you want to delete the " + this.dbId + " database?";
+  },
+
+  backgroundPressed: function(){
+    this.popout();
+  }
+
+});
+
+module.exports = ConfirmDeletePopup;

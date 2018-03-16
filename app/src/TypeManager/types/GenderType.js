@@ -1,26 +1,26 @@
 const FieldType = require("../FieldType");
 
-function GenderType() {
+function GenderType(){
 
 }
 
 GenderType.prototype = Object.assign(Object.create(FieldType.prototype), {
-    constructor: GenderType,
+  constructor: GenderType,
 
-    generate: function(previous) {
-        let current = previous;
-        if (typeof previous == 'undefined') current = {};
+  generate: function(previous){
+    let current = previous;
+    if(typeof previous == 'undefined') current = {};
 
-        let target = "";
-        if (Math.random() * 2 <= 1) {
-            target = "Male";
-        } else {
-            target = "Female";
-        }
-        current.Gender = target;
-
-        return current;
+    let target = "";
+    if(Math.random() * 2 <= 1){
+      target = "Male";
+    }else{
+      target = "Female";
     }
+    current.Gender = target;
+
+    return current;
+  }
 });
 
 module.exports = GenderType;
