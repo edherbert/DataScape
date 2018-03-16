@@ -27,17 +27,8 @@ DatabaseEditPopup.prototype = Object.assign(Object.create(Popup.prototype), {
 
     let that = this;
     deleteDatabaseButton.onclick = function(e){
-      //let deletePopup = new ConfirmDeletePopup(that.dbId, that.dbContainer)
-      // if(confirm("Do you really want to delete this database?")){
-      //   storageManager.removeDatabase(dbId);
-      //   //Remove the child from the list
-      //   that.dbContainer.parentElement.removeChild(that.dbContainer);
-      //   that.popout();
-      // }
-      console.log(that)
-      that.popout();
-
       pageManager.popupConfirmDelete(that.dbId, that.dbContainer);
+      that.popout();
     }
 
     this.backgroundView.append(databaseTitle);
@@ -49,8 +40,10 @@ DatabaseEditPopup.prototype = Object.assign(Object.create(Popup.prototype), {
   popup: function(dbId, dbContainer){
     Popup.prototype.popup.call(this);
 
+    //Make the title's input equal to the database name.
     this.databaseTitleInput.value = dbId;
 
+    //Store these values for later.
     this.dbId = dbId;
     this.dbContainer = dbContainer;
   },

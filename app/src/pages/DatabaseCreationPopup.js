@@ -32,12 +32,15 @@ DatabaseCreationPopup.prototype = Object.assign(Object.create(Popup.prototype), 
 
     let that = this;
     acceptDbButton.onclick = function(e){
+      //Do a regex function to check if the title is valid.
       if(that.databaseTitleInput.value.match("^[a-zA-Z]+$")){
+        //Add it to the list.
         that.dbSelectionView.addToList(that.databaseTitleInput.value);
+        //Create the database in storage
         storageManager.createDatabase(that.databaseTitleInput.value);
         that.popout();
       }else{
-        alert("Enter valid characters only please. No illegal characters allowed.");
+        alert("Enter valid characters only please. Characters must be between a-z and A-Z.");
         that.popout();
       }
     }
@@ -45,9 +48,6 @@ DatabaseCreationPopup.prototype = Object.assign(Object.create(Popup.prototype), 
     declineDbButton.onclick = function(e){
       that.popout();
     }
-
-
-
 
     this.backgroundView.append(databaseTitle);
     this.backgroundView.append(this.databaseTitleInput);

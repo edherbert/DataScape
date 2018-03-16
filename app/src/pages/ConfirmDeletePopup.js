@@ -42,11 +42,8 @@ ConfirmDeletePopup.prototype = Object.assign(Object.create(Popup.prototype), {
     }
 
     this.backgroundView.append(this.confirmMessage);
-    //this.backgroundView.append(deleteDatabaseButton);
     this.backgroundView.append(this.confirmButton);
     this.backgroundView.append(this.cancelButton);
-
-    //this.popup();
   },
 
   popup: function(dbId, dbContainer){
