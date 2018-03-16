@@ -20,12 +20,13 @@ const JobType = require('./types/JobType');
 const LanguageType = require('./types/LanguageType');
 
 function TypeManager(){
+  //Create a new instance of each type.
   this.testType = new TestType();
   this.firstNameType = new FirstNameType();
   this.secondNameType = new SecondNameType();
   this.genderType = new GenderType();
   this.postcodeType = new PostcodeType();
-  this.randomColourType = new RandomColourType();  //creating the instance
+  this.randomColourType = new RandomColourType();
   this.booleanType = new BooleanType();
   this.emailType = new EmailType();
   this.phoneNumberType = new PhoneNumberType();
@@ -41,8 +42,7 @@ function TypeManager(){
   this.movieTitleType = new MovieTitleType();
   this.languageType = new LanguageType();
 
-
-
+  //List the types so they can be retrieved later.
   this.typeNames = ["First Name", "Second Name", "Gender", "Postcode", "Random Colour", "Boolean", "Email",
   "Phone Number", "Title", "Age", "City", "Born Country", "Religion", "County",  "Shirt Size", "Movie Title", "Currency",
   "Job", "Language"
@@ -69,7 +69,7 @@ TypeManager.prototype = {
           break;
 		    case "Random Colour":
 		      return this.randomColourType;
-		      break; //Break is used to stop it from searching when its found the data
+		      break;
 		    case "Boolean":
 			    return this.booleanType;
 			    break;
@@ -127,4 +127,4 @@ TypeManager.prototype = {
   }
 };
 
-module.exports = new TypeManager; //Exporting instance of typeMananger
+module.exports = new TypeManager;

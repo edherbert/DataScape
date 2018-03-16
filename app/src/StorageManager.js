@@ -17,6 +17,7 @@ StorageManager.prototype = {
 
 		let list = this.getDatabasesList();
 
+		//Go through the list and remove the database if it's found
 		let found = false;
 		for(t = 0; t < list.length; t++){
 			if(list[t] == databaseName){
@@ -24,15 +25,18 @@ StorageManager.prototype = {
 			}
 		}
 
+		//Set the list without the database to the current one.
 		this.setDatabasesList(list);
 	},
 
 	retrieveDatabase: function(databaseName){
+		//Go through the database. If it's found then return it.
 		let retrieved = localStorage.getItem(databaseName);
 		if(retrieved == null){
 			console.log("Can't retrieve database " + databaseName + ".");
 			return null;
 		}else{
+			//Return the database as a json.
 			return JSON.parse(retrieved);
 		}
 	},
@@ -40,11 +44,11 @@ StorageManager.prototype = {
 	//Create a database and add it to the list
 	createDatabase: function(title){
 		let list = this.getDatabasesList();
-		//if(typeof list == "undefined") list = [];
 		list.push(title);
-
+		//Push the new database's title to the list.
 		this.setDatabasesList(list);
 
+		//Create a database in storage.
 		let bareDatabase = {
 			tables: [],
 			connectors: []
@@ -53,6 +57,7 @@ StorageManager.prototype = {
 	},
 
 	renameDatabase: function(oldName, newName){
+		//Renaming involves removing the old one and creating a new one.
 		let oldDb = this.retrieveDatabase(oldName);
 		let oldList = this.getDatabasesList();
 
@@ -61,6 +66,7 @@ StorageManager.prototype = {
 			if(oldList[t] == oldName){
 				found = true;
 
+				//Set the new name over the old one.
 				oldList[t] = newName;
 				break;
 			}
@@ -74,6 +80,7 @@ StorageManager.prototype = {
 			console.log("Renaming " + oldName + " to " + newName + ".");
 			this.setDatabasesList(oldList);
 
+			//Remove the old one and store the new one.
 			localStorage.removeItem(oldName);
 			this.storeDatabase(newName, oldDb);
 		}
@@ -81,10 +88,12 @@ StorageManager.prototype = {
 	},
 
 	setDatabasesList: function(list){
+		//Set the list of database titles.
 		localStorage.setItem("databasesList", JSON.stringify(list));
 	},
 
 	getDatabasesList: function(){
+		//Return the list of databases from storage.
 		let list = localStorage.getItem("databasesList");
 		if(list == "" || list == null){
 			list = [];

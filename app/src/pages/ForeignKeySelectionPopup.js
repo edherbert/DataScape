@@ -47,6 +47,7 @@ ForeignKeySelectionPopup.prototype = Object.assign(Object.create(Popup.prototype
       elem.onclick = function(){
         that.popout();
 
+        //Add the entry to the list
         editPopup.newRow("", "Foreign Key", true, structure.tables[s].tableId);
       };
 

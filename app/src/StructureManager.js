@@ -14,6 +14,7 @@ StructureManager.prototype = {
   },
 
   getTableIndexById: function(id){
+    //Get the table's array index from it's mxid.
     for(t = 0; t < this.structure.tables.length; t++){
       if(this.structure.tables[t].tableId == id){
         return t;
@@ -22,10 +23,12 @@ StructureManager.prototype = {
   },
 
   getTableById: function(id){
+    //Return the table json by id.
     return this.structure.tables[this.getTableIndexById(id)];
   },
 
   replaceTable: function(id, table){
+    //Override the table data with new data.
     this.structure.tables[this.getTableIndexById(id)] = table;
   },
 
@@ -34,10 +37,12 @@ StructureManager.prototype = {
   },
 
   setTableTypes: function(id, types){
+    //Set the list of field types to use in this table.
     this.structure.tables[this.getTableIndexById(id)].types = types;
   },
 
   pushTable: function(table){
+    //Add a new table json to the list.
     this.structure.tables.push(table);
   },
 
@@ -59,6 +64,7 @@ StructureManager.prototype = {
   },
 
   addEdge: function(source, target){
+    //Create a new edge and add it to the list.
     let newEdge = {originTable: 0, destinationTable: 0, type: "One to many"};
     newEdge.originTable = this.getTableIndexById(source);
     newEdge.destinationTable = this.getTableIndexById(target);

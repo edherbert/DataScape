@@ -17,8 +17,10 @@ TypeSelectionPopup.prototype = Object.assign(Object.create(Popup.prototype), {
     let container = document.createElement('div');
     container.id = "fieldTypeContainer";
 
+    //Get a list of the available field types
     let list = typeManager.getTypesList();
 
+    //Iterate over the list and add them to the container.
     for(t = 0; t < list.length; t++){
       let item = document.createElement('div');
       item.innerHTML = list[t];
@@ -27,12 +29,13 @@ TypeSelectionPopup.prototype = Object.assign(Object.create(Popup.prototype), {
       let row = Math.floor(t / 3);
       let column = t % 3;
 
+      //Use a css grid to position the items.
       item.style['grid-row'] = row;
       item.style['grid-column'] = column;
 
       let that = this;
       item.onclick = function(e){
-        console.log(e.target.innerHTML);
+        //Set the name of the type as the lable of the container.
         that.typeContainer.innerHTML = e.target.innerHTML;
 
         that.pageManager.popoutTypeSelection();
@@ -42,6 +45,7 @@ TypeSelectionPopup.prototype = Object.assign(Object.create(Popup.prototype), {
       container.append(item);
     }
 
+    //AA-D80073
 
     this.backgroundView.append(title);
     this.backgroundView.append(container);

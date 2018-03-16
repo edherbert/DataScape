@@ -9,12 +9,15 @@ function TableEditorView(pageManager){
   this.tableTitleInput = document.getElementById("tableTitleField");
 
   let that = this;
+  //If something is typed in the title input then run the change made method.
   this.tableTitleInput.oninput = function(){
     that.changeMade();
   };
 
+  //The id of the table being edited.
   this.currentId = 0;
 
+  //A list of the boxes so that they can be accessed later
   this.nameBoxes = [];
   this.typeBoxes = [];
 
@@ -36,9 +39,11 @@ TableEditorView.prototype = Object.assign(Object.create(View.prototype), {
   //Make the view appear as a popup, rather than as something that fills the entire screen.
   popup: function(id){
     this.currentId = id;
+    //Get the current table from the structure manager.
     let table = structureManager.getTableById(id);
     if(!table) return;
 
+    //Add the rows to the editor
     this.setupRows(table.types);
     this.tableTitleInput.value = table.title;
 
@@ -47,19 +52,23 @@ TableEditorView.prototype = Object.assign(Object.create(View.prototype), {
   },
 
   setupRows: function(fieldTypes){
+    //Remove the old rows
     this.clearRows();
     for(r = 0; r < fieldTypes.length; r++){
       let foreignKey = false;
+      //Go through the entries and add the rows accordingly.
       if(fieldTypes[r].fieldType == "Foreign Key") foreignKey = true;
       this.newRow(fieldTypes[r].fieldName, fieldTypes[r].fieldType, foreignKey);
     }
   },
 
   clearRows: function(){
+    //Remove everything from the container
     while (this.table.firstChild) {
       this.table.removeChild(this.table.firstChild);
     }
 
+    //Create a new table (as the old one was removed) and add it to the container.
     var heading = document.createElement('tr');
     var heading1 = document.createElement('th');
     heading1.innerHTML = "Field Name";
@@ -72,11 +81,13 @@ TableEditorView.prototype = Object.assign(Object.create(View.prototype), {
   },
 
   newRow: function(name, fieldType, foreignKey, tableId){
+    //Create the components that'll go in the new rows.
     var row = document.createElement('tr');
     var first = document.createElement('td');
     var second = document.createElement('td');
 
     var third = document.createElement('td');
+    //Create the cross button.
     let image = document.createElement('img');
     image.src = "cross.png";
     image.className = "FieldRemoveCross";
@@ -91,6 +102,7 @@ TableEditorView.prototype = Object.assign(Object.create(View.prototype), {
     typeButton.className = "FieldTypeButton";
     second.append(typeButton);
 
+    //Make the row look different if it contains a foreign key
     let that = this;
     if(!foreignKey){
       typeButton.onclick = function(e){
@@ -119,6 +131,7 @@ TableEditorView.prototype = Object.assign(Object.create(View.prototype), {
       that.changeMade();
     }
 
+    //Add the components to the row and then append it.
     this.nameBoxes.push(nameInput);
     this.typeBoxes.push(typeButton);
 
@@ -129,17 +142,21 @@ TableEditorView.prototype = Object.assign(Object.create(View.prototype), {
   },
 
   updateStructureManager: function(){
+    //Temporary data that's added to by the loop.
     let tempTable = [];
 
+    //Go through the name boxes and add their data to the structure manager.
     for(t = 0; t < this.nameBoxes.length; t++){
       let data = {fieldName: this.nameBoxes[t].value, fieldType: this.typeBoxes[t].innerHTML};
 
+      //If it's a foreign key include the id.
       if(this.typeBoxes[t].innerHTML == "Foreign Key"){
         data.tableId = this.typeBoxes[t].tableId;
       }
       tempTable.push(data);
     }
 
+    //Set the data in the structure manager.
     structureManager.setTableTitle(this.currentId, this.tableTitleInput.value);
     structureManager.setTableTypes(this.currentId, tempTable);
   },
@@ -161,11 +178,14 @@ TableEditorView.prototype = Object.assign(Object.create(View.prototype), {
   backgroundPressed: function(e){
     //Make the event not fire on a child of the background.
     if(e.target != this.container) return;
+
+    //Update the structure manager when the popup is closed.
     this.updateStructureManager();
     this.pageManager.popoutTableSelection();
   },
 
   newRowButtonPressed: function(){
+    //Create a blank row that isn't a foreign key.
     this.newRow("", "Field Type", false);
     this.changeMade();
   },
