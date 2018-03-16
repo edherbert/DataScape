@@ -64,17 +64,19 @@ StorageManager.prototype = {
 		let found = false;
 		for(t = 0; t < oldList.length; t++){
 			if(oldList[t] == oldName){
-				found = true;
+				if(newName.match("^[a-zA-Z1-9_]+$")){
+					found = true;
 
-				//Set the new name over the old one.
-				oldList[t] = newName;
+					//Set the new name over the old one if the new name contains no illegal characters.
+					oldList[t] = newName;
+				}
 				break;
 			}
 		}
 
 		//Check to see if that database exists in the databases list as well as if it's key can be found.
 		if(oldDb == null || !found){
-			alert("Cannot rename database as that database does not exist.");
+			alert("Cannot rename database as that database either does not exist, or contains illegal characters.");
 			return false;
 		}else{
 			console.log("Renaming " + oldName + " to " + newName + ".");
