@@ -5,24 +5,20 @@ function TableLinker(){
 TableLinker.prototype = {
   linkTables: function(previous){
     for(t = 0; t < previous.tables.length; t++){
-      //for(i = 0; i < previous.tables[t].types.length; i++){
-        /*if(previous.tables[t].types[i].fieldType == "ForeignKey"){
-          previous.tables[t].types[i].tableId
-        }*/
-      //}
+      //Go through all tables are create an intermediate place to store the finished data.
       previous.tables[t].done = [];
+      //Go through the tables for the ammount of data that would be generated.
       for(i = 0; i < previous.tables[t].requiredAmmount; i++){
+        //Temporary place to store the data before it's pushed.
         let temp = {};
 
+        //Go over all the types in the table.
         for(x = 0; x < previous.tables[t].types.length; x++){
           let fieldType = previous.tables[t].types[x].fieldType;
           //If the value is a foreign key then assign it a value between the bounds.
           if(fieldType == "Foreign Key"){
             //Get the table that the foreign key references and get it's size.
             //Then generate a random number between that. This will be used as the foreign key.
-
-            console.log(previous.tables[t].types[x].tableId);
-            //let randomAmmount = previous.tables[previous.tables[t].types[x].tableId].requiredAmmount;
 
             //temp[previous.tables[t].types[x].fieldName] = Math.floor(Math.random() * randomAmmount);
           }else{

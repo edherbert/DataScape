@@ -3,9 +3,13 @@ function Popup(){
 }
 
 Popup.prototype = {
+  //How long the animation takes to complete.
   speed: 0.2,
 
   setup: function(){
+    //Create the base of what makes a popup
+    //The background view
+    //The actual container
     this.container = document.createElement('div');
     this.container.className = "popup";
 
@@ -30,17 +34,15 @@ Popup.prototype = {
     this.container.style.animation = "fadeOut "+this.speed+"s";
 
     var that = this;
+    //After the time it takes the animation to complete, hide the popup fully.
     setTimeout(function(){
       that.container.style.visibility = "hidden";
     }, this.speed * 1000);
   },
 
+  //A stub function to be overriden
   backgroundPressed: function(){
   },
-
-  generateData: function(){
-    
-  }
 };
 
 module.exports = Popup;

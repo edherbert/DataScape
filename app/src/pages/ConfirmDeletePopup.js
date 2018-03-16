@@ -30,18 +30,11 @@ ConfirmDeletePopup.prototype = Object.assign(Object.create(Popup.prototype), {
 
     let that = this;
     this.confirmButton.onclick = function(e){
-
-      if(true || confirm("Do you really want to delete this database?")){
-        storageManager.removeDatabase(dbId);
-        //Remove the child from the list
-        that.dbContainer.parentElement.removeChild(that.dbContainer);
-        that.popout();
-      }
-
-      /*storageManager.removeDatabase(that.dbId);
+      //Actually delete the database.
+      storageManager.removeDatabase(that.dbId);
       //Remove the child from the list
       that.dbContainer.parentElement.removeChild(that.dbContainer);
-      that.popout();*/
+      that.popout();
     }
 
     this.cancelButton.onclick = function(e){

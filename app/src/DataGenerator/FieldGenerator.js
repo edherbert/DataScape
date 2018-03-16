@@ -11,14 +11,15 @@ FieldGenerator.prototype = {
     for(t = 0; t < parsedTables.tables.length; t++){
       parsedTables.tables[t].data = [];
 
-      //Do this based on types.
-      //This will avoid me having to do a lookup of the type each time it's needed.
-      //Rather than it does all of each type once.
+      //Traverse the list by types, rather than tables.
+      //This will avoid having to jump around through memory as all the types can be batched together.
       for(f = 0; f < parsedTables.tables[t].typeOrder.length; f++){
+        //Store the type so the lookup only has to happen once.
         let type = typeManager.getFieldType(parsedTables.tables[t].typeOrder[f]);
+        //Generate it for the required ammount
         for(y = 0; y < parsedTables.tables[t].requiredAmmount; y++){
+          //Generate the data.
           parsedTables.tables[t].data[y] = type.generate(parsedTables.tables[t].data[y]);
-          //console.log(parsedTables.tables[t].data[y]);
         }
       }
     }

@@ -8,29 +8,19 @@ TableParser.prototype = {
   constructor: TableParser,
 
   parseStructure: function(structure){
-    console.log(structure);
     for(t = 0; t < structure.tables.length; t++){
       requirements = [];
+      //Go through the tables and make a list of the requirements.
       for(i = 0; i < structure.tables[t].types.length; i++){
+        //Push as a string.
         requirements.push(""+structure.tables[t].types[i].fieldType);
-        }
       }
 
-      //Match up mxids with index ids
-      console.log(structure.tables[t]);
-
-      //console.log(requirements);
       for(i = 0; i < requirements.length; i++){
-        if(requirements[i] == "Foreign Key"){
-          /*console.log(structure.tables[t]);
-          //The entry is a foreign key, so don't try to trace it's requirements.
-          for(s = 0; s < structure.tables.length; s++){
-            if(structure.tables[s].tableId == requirements[i].tableId){
-              console.log("Found");
-            }
-          }*/
-        }else{
+        //If the requirement is a normal field type (not a foreign Key).
+        if(requirements[i] != "Foreign Key"){
           if(!this.checkIfListed(requirements[i])){
+            //Go through the requirements and add them to the list.
             this.traverseRequirements(requirements[i]);
             this.done.push(requirements[i]);
           }
@@ -39,17 +29,15 @@ TableParser.prototype = {
 
       structure.tables[t].typeOrder = this.done;
 
-      //console.log(this.done);
       //Reset the done list after use.
       this.done = [];
-
-      //console.log(typeManager.getRequirements("FirstName"));
     }
     return structure;
   },
   done: [],
 
   traverseRequirements: function(requirements){
+    //Recursively search the requirement tree until the leaf nodes are found.
     var newRequirements = typeManager.getRequirements(requirements);
     //Determine if there are any requirements to traverse.
     if(newRequirements.length <= 0){
