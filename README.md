@@ -5,7 +5,7 @@ A web based SQL data generator.
 You can find helium testing documents in app/Tests.
 
 ## Running
-You should be able to run the application by going to public/index.html.
+You should be able to run the application by going to bin/index.html.
 
 If this does not work then you'll need to build the application from source.
 

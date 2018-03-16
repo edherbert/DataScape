@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>DataScape</title>
+  <link rel="stylesheet" href="./app.css">
+  <link rel="stylesheet" href="./common.css">
+  <link rel="icon" href="./webicon.png">
+  <script src = "./mxClient.min.js"></script>
+  <script src="./app.js"></script>
+  <script>require('initialize');</script>
+</head>
+<body>
+
+<div id = "topBar">
+<div id = "topBarTitle"><b>Data</b>scape</div>
+</div>
+
+<div id = "testView" class = "view">
+<h1>test view</h1>
+<p>Hey look it's a button!</p>
+<p>I wonder what it does??!</p>
+<button id = "testButton">Hide view for 2 seconds</button>
+<p>Not like it's written on the button or anything...</p>
+</div>
+
+<div id = "dataBaseSelectionView" class = "view">
+<!-- <button id = "newDbbutton" >Create a database</button> -->
+<div id = "newDbbutton">Create a database</div>
+</div>
+
+<div id = "DiagramView" class = "view">
+<div id = "DiagramToolbar">
+  <ol>
+    <li><div class = "DiagramToolBarItem" id = "generateDataButton">Generate Data</div></li>
+    <li><div class = "DiagramToolBarItem" id = "createTableButton">Create table</div></li>
+    <li><div class = "DiagramToolBarItem" id = "saveDatabaseButton">Save</div></li>
+
+    <li><div class = "DiagramToolBarItem" id = "returnToSelectionButton">Return to database Selection</div></li>
+  </ol>
+</div>
+<div id = "DiagramContainer"></div>
+</div>
+
+<div id = "TableEditorView" class = "view">
+<div id = "backgroundView">
+<input type="text" id = "tableTitleField" name="tableTitle" />
+<hr/>
+<h2>Fields:</h2>
+<div id = "TableEditorTableContainer">
+</div>
+
+<button type = "button" id = "newRowButton">New row</button>
+<button type = "button" id = "addForeignKeyButton">Add Foreign Key</button>
+</div>
+</div>
+
+</body>
