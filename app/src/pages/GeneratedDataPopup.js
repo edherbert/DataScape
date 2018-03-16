@@ -44,8 +44,16 @@ GeneratedDataPopup.prototype = Object.assign(Object.create(Popup.prototype), {
 
   popup: function(data){
     Popup.prototype.popup.call(this);
-
-    this.dataDisplay.innerHTML = JSON.stringify(data);
+    let outputData = "";
+    for(t = 0; t < data.tables.length; t++){
+      for(i = 0; i < data.tables[t].done.length; i++){
+        console.log(JSON.stringify(data.tables[t].done[i]));
+        outputData += JSON.stringify(data.tables[t].done[i]);
+        outputData += "<br>";
+      }
+    }
+    outputData = outputData.split('{').join('').split('}').join('').split('"').join(' ');
+    this.dataDisplay.innerHTML = outputData;
   },
 
   backgroundPressed: function(){
