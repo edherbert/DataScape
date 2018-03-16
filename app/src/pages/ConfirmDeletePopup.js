@@ -3,7 +3,6 @@ const Popup = require('./Popup');
 const storageManager = require('../StorageManager');
 
 function ConfirmDeletePopup(dbId, dbContainer){
-  console.log(this)
   this.setup(dbId, dbContainer);
 }
 
@@ -13,7 +12,6 @@ ConfirmDeletePopup.prototype = Object.assign(Object.create(Popup.prototype), {
   speed: 0.4,
 
   setup: function(dbId, dbContainer){
-    console.log(dbId);
     Popup.prototype.setup.call(this);
 
 
@@ -59,7 +57,6 @@ ConfirmDeletePopup.prototype = Object.assign(Object.create(Popup.prototype), {
   },
 
   popup: function(dbId, dbContainer){
-    console.log(dbId);
     Popup.prototype.popup.call(this);
     this.dbId = dbId;
     this.dbContainer = dbContainer;

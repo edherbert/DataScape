@@ -42,11 +42,12 @@ ForeignKeySelectionPopup.prototype = Object.assign(Object.create(Popup.prototype
       elem.className = "tableEntry";
       elem.innerHTML = structure.tables[t].title;
 
+      let s = t;
       let that = this;
       elem.onclick = function(){
         that.popout();
 
-        editPopup.newRow("", "Foreign Key", true);
+        editPopup.newRow("", "Foreign Key", true, structure.tables[s].tableId);
       };
 
       this.backgroundView.append(elem);

@@ -1,6 +1,9 @@
 # DataScape
 A web based SQL data generator.
 
+## Tests
+You can find helium testing documents in app/Tests.
+
 ## Running
 You should be able to run the application by going to public/index.html.
 

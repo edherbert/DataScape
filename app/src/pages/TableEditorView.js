@@ -71,7 +71,7 @@ TableEditorView.prototype = Object.assign(Object.create(View.prototype), {
     this.table.append(heading);
   },
 
-  newRow: function(name, fieldType, foreignKey){
+  newRow: function(name, fieldType, foreignKey, tableId){
     var row = document.createElement('tr');
     var first = document.createElement('td');
     var second = document.createElement('td');
@@ -97,6 +97,7 @@ TableEditorView.prototype = Object.assign(Object.create(View.prototype), {
         that.pageManager.popupTypeSelection(e.target);
       }
     }else{
+      typeButton.tableId = tableId;
       typeButton.style['background-color'] = "#82D47F";
       typeButton.style['cursor'] = "default";
     }
@@ -131,7 +132,12 @@ TableEditorView.prototype = Object.assign(Object.create(View.prototype), {
     let tempTable = [];
 
     for(t = 0; t < this.nameBoxes.length; t++){
-      tempTable.push({fieldName: this.nameBoxes[t].value, fieldType: this.typeBoxes[t].innerHTML});
+      let data = {fieldName: this.nameBoxes[t].value, fieldType: this.typeBoxes[t].innerHTML};
+
+      if(this.typeBoxes[t].innerHTML == "Foreign Key"){
+        data.tableId = this.typeBoxes[t].tableId;
+      }
+      tempTable.push(data);
     }
 
     structureManager.setTableTitle(this.currentId, this.tableTitleInput.value);

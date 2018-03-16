@@ -17,12 +17,14 @@ TableLinker.prototype = {
         for(x = 0; x < previous.tables[t].types.length; x++){
           let fieldType = previous.tables[t].types[x].fieldType;
           //If the value is a foreign key then assign it a value between the bounds.
-          if(fieldType == "ForeignKey"){
+          if(fieldType == "Foreign Key"){
             //Get the table that the foreign key references and get it's size.
             //Then generate a random number between that. This will be used as the foreign key.
-            let randomAmmount = previous.tables[previous.tables[t].types[x].tableId].requiredAmmount;
 
-            temp[previous.tables[t].types[x].fieldName] = Math.floor(Math.random() * randomAmmount);
+            console.log(previous.tables[t].types[x].tableId);
+            //let randomAmmount = previous.tables[previous.tables[t].types[x].tableId].requiredAmmount;
+
+            //temp[previous.tables[t].types[x].fieldName] = Math.floor(Math.random() * randomAmmount);
           }else{
             //Assign temp the generated value under it's desired name.
             //If a table has the same name for a field twice this will make it only appear once.

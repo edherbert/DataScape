@@ -13,12 +13,22 @@ TableParser.prototype = {
       requirements = [];
       for(i = 0; i < structure.tables[t].types.length; i++){
         requirements.push(""+structure.tables[t].types[i].fieldType);
+        }
       }
+
+      //Match up mxids with index ids
+      console.log(structure.tables[t]);
 
       //console.log(requirements);
       for(i = 0; i < requirements.length; i++){
         if(requirements[i] == "Foreign Key"){
+          /*console.log(structure.tables[t]);
           //The entry is a foreign key, so don't try to trace it's requirements.
+          for(s = 0; s < structure.tables.length; s++){
+            if(structure.tables[s].tableId == requirements[i].tableId){
+              console.log("Found");
+            }
+          }*/
         }else{
           if(!this.checkIfListed(requirements[i])){
             this.traverseRequirements(requirements[i]);
